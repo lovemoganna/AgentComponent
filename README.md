@@ -1,6 +1,6 @@
-# AgentComponent Prompt Repository
+# AgentComponent Prompt & Skill Repository
 
-这是 Prompt 仓库的导航地图。不要从目录逐个翻文件，先从“我要解决什么问题”进入。
+这是 Prompt 与 Skill 仓库的导航地图。不要从目录逐个翻文件，先从“我要解决什么问题”进入。
 
 ## 快速入口
 
@@ -13,6 +13,7 @@
 | 把复杂内容做成可交互解释页面 | [HTML 交互解释器](prompts/visualization/generate/generate-html-explainer.md) | 生成可直接打开的单文件 HTML 解释页面 |
 | 把一个主题做成动态图形讲解视频 | [讲解视频生成](prompts/visualization/generate/generate-explainer-video.md) | 输出分镜、旁白、画面动作和实现方案 |
 | 把新的高价值 Prompt 规范归档到仓库 | [Prompt 仓库分类与归档](prompts/workflow/maintain/prompt-repository.md) | 查重、分类、命名、入库，并同步维护本 README |
+| 把新的 Skill 查重、规范化并存入仓库 | [Skill Repository](skills/skill-repository/SKILL.md) | 负责 Skill 的 canonical 入库、资源归档、README 导航与生命周期维护 |
 | 测试、玩耍、调试和持续维护 AI Skills | [Skill Lab](skills/skill-lab/SKILL.md) | 用 exploratory / regression / adversarial 闭环测试 Skill，修复可泛化缺陷并防止历史能力回归 |
 
 ## 能力地图
@@ -39,6 +40,8 @@ prompts/
         └── Prompt 仓库分类与归档
 
 skills/
+├── skill-repository/
+│   └── Skill Repository：查重、规范化、入库与导航维护
 └── skill-lab/
     └── Skill Lab：测试、调试、回归与持续维护 Skills
 ```
@@ -76,7 +79,26 @@ skills/
 
 | Skill | 解决的问题 | 路径 |
 |---|---|---|
+| [Skill Repository](skills/skill-repository/SKILL.md) | 新 Skill 如何查重、规范化、确定 canonical 路径、保存资源并同步仓库导航 | `skills/skill-repository/SKILL.md` |
 | [Skill Lab](skills/skill-lab/SKILL.md) | 测试集经常变化时，如何持续测试、修正和维护 Skills，同时防止针对单一样本过拟合和历史能力回归 | `skills/skill-lab/SKILL.md` |
+
+## Skills 分工
+
+```text
+新 Skill / 新版本
+      ↓
+Skill Repository
+  查重 → 规范化 → canonical 入库 → README 导航
+      ↓
+Skill Lab
+  exploratory → 缺陷定位 → 修正 → regression → adversarial
+      ↓
+Skill Repository
+  保持 canonical 包与仓库导航持续一致
+```
+
+- `Skill Repository` 管“怎么存、存哪、怎么维护 canonical 资产”。
+- `Skill Lab` 管“怎么测、怎么改、怎么证明没有改坏”。
 
 ## 使用方式
 
