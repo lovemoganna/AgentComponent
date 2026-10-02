@@ -9,6 +9,7 @@
 | 不确定该用文字、表格、图、HTML 还是视频 | [自动选择最佳输出形式](prompts/meta-prompt/select/select-best-output-format.md) | 先判断最省认知成本的输出形式，再直接生成 |
 | 把复杂内容写得更短、更清楚、更容易读懂 | [ASD-STE100 清晰表达](prompts/writing/explain/explain-with-asd-ste100.md) | 用接近 ASD-STE100 的受控表达约束解释复杂内容 |
 | 用流程、因果、结构或关系图解释问题 | [图解优先](prompts/visualization/generate/generate-diagram-first-explainer.md) | 先选最合适的图，再用图解释 |
+| 自主选择最合适的 PlantUML 图来表达流程、依赖、执行计划或性能 | [PlantUML 自主选图](prompts/visualization/generate/select-and-generate-plantuml-diagram.md) | 按关系类型选择 Activity、WBS、Component、Sequence、State、Timing 等图，并直接生成可渲染 PlantUML |
 | 把复杂内容做成可交互解释页面 | [HTML 交互解释器](prompts/visualization/generate/generate-html-explainer.md) | 生成可直接打开的单文件 HTML 解释页面 |
 | 把一个主题做成动态图形讲解视频 | [讲解视频生成](prompts/visualization/generate/generate-explainer-video.md) | 输出分镜、旁白、画面动作和实现方案 |
 | 把新的高价值 Prompt 规范归档到仓库 | [Prompt 仓库分类与归档](prompts/workflow/maintain/prompt-repository.md) | 查重、分类、命名、入库，并同步维护本 README |
@@ -28,6 +29,7 @@ prompts/
 ├── visualization/
 │   └── generate/
 │       ├── 图解优先
+│       ├── PlantUML 自主选图
 │       ├── HTML 交互解释器
 │       └── 讲解视频生成
 │
@@ -55,6 +57,7 @@ prompts/
 | Prompt | 解决的问题 | 路径 |
 |---|---|---|
 | [图解优先](prompts/visualization/generate/generate-diagram-first-explainer.md) | 文字不如图容易理解 | `prompts/visualization/generate/generate-diagram-first-explainer.md` |
+| [PlantUML 自主选图](prompts/visualization/generate/select-and-generate-plantuml-diagram.md) | 不知道该用哪种 PlantUML 图表达流程、层级、依赖、交互、状态、SQL 执行计划或性能 | `prompts/visualization/generate/select-and-generate-plantuml-diagram.md` |
 | [HTML 交互解释器](prompts/visualization/generate/generate-html-explainer.md) | 静态文字不足以承载复杂信息 | `prompts/visualization/generate/generate-html-explainer.md` |
 | [讲解视频生成](prompts/visualization/generate/generate-explainer-video.md) | 需要用动态过程逐步解释主题 | `prompts/visualization/generate/generate-explainer-video.md` |
 
