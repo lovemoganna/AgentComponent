@@ -12,7 +12,7 @@
 | 自主选择最合适的 PlantUML 图来表达流程、依赖、执行计划或性能 | [PlantUML 自主选图](prompts/visualization/generate/select-and-generate-plantuml-diagram.md) | 按关系类型选择 Activity、WBS、Component、Sequence、State、Timing 等图，并直接生成可渲染 PlantUML |
 | 把复杂内容做成可交互解释页面 | [HTML 交互解释器](prompts/visualization/generate/generate-html-explainer.md) | 生成可直接打开的单文件 HTML 解释页面 |
 | 把一个主题做成动态图形讲解视频 | [讲解视频生成](prompts/visualization/generate/generate-explainer-video.md) | 输出分镜、旁白、画面动作和实现方案 |
-| 把新的高价值 Prompt 规范归档到仓库 | [Prompt 仓库分类与归档](prompts/workflow/maintain/prompt-repository.md) | 查重、分类、命名、入库，并同步维护本 README |
+| 把模糊想法整理成 Coding Agent 可直接执行的开发需求 | [Vibe Coding 需求表达标准](prompts/coding/specify/write-vibe-coding-requirement.md) | 明确现状、痛点、目标、约束、执行闭环与验收标准 |\n| 把新的高价值 Prompt 规范归档到仓库 | [Prompt 仓库分类与归档](prompts/workflow/maintain/prompt-repository.md) | 查重、分类、命名、入库，并同步维护本 README |
 | 把新的 Skill 查重、规范化并存入仓库 | [Skill Repository](skills/skill-repository/SKILL.md) | 负责 Skill 的 canonical 入库、资源归档、README 导航与生命周期维护 |
 | 测试、玩耍、调试和持续维护 AI Skills | [Skill Lab](skills/skill-lab/SKILL.md) | 用 exploratory / regression / adversarial 闭环测试 Skill，修复可泛化缺陷并防止历史能力回归 |
 
@@ -48,7 +48,7 @@ skills/
 
 ## 按能力分类
 
-### Meta Prompt
+### Coding\n\n| Prompt | 解决的问题 | 路径 |\n|---|---|---|\n| [Vibe Coding 需求表达标准](prompts/coding/specify/write-vibe-coding-requirement.md) | 把模糊开发想法转换成 Coding Agent 可执行、可验证、可回滚的工程需求 | `prompts/coding/specify/write-vibe-coding-requirement.md` |\n\n### Meta Prompt
 
 | Prompt | 解决的问题 | 路径 |
 |---|---|---|
