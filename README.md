@@ -13,7 +13,7 @@
 | 把复杂内容做成可交互解释页面 | [HTML 交互解释器](prompts/visualization/generate/generate-html-explainer.md) | 生成可直接打开的单文件 HTML 解释页面 |
 | 把一个主题做成动态图形讲解视频 | [讲解视频生成](prompts/visualization/generate/generate-explainer-video.md) | 输出分镜、旁白、画面动作和实现方案 |
 | 把模糊想法整理成 Coding Agent 可直接执行的开发需求 | [Vibe Coding 需求表达标准](prompts/coding/specify/write-vibe-coding-requirement.md) | 明确现状、痛点、目标、约束、执行闭环与验收标准 |\n| 把新的高价值 Prompt 规范归档到仓库 | [Prompt 仓库分类与归档](prompts/workflow/maintain/prompt-repository.md) | 查重、分类、命名、入库，并同步维护本 README |
-| 把新的 Skill 查重、规范化并存入仓库 | [Skill Repository](skills/skill-repository/SKILL.md) | 负责 Skill 的 canonical 入库、资源归档、README 导航与生命周期维护 |
+| 把当前会话中已经调试满意的 Skill 收录或更新到 Org-Skills | [Skill Repository](skills/skill-repository/SKILL.md) | 读取 `lovemoganna/Org-Skills` 当前 HEAD，查重后新增或更新 Canonical Skill，并同步 Org-Skills README；不重新设计或调试 Skill |
 | 测试、玩耍、调试和持续维护 AI Skills | [Skill Lab](skills/skill-lab/SKILL.md) | 用 exploratory / regression / adversarial 闭环测试 Skill，修复可泛化缺陷并防止历史能力回归 |
 
 ## 能力地图
@@ -41,7 +41,7 @@ prompts/
 
 skills/
 ├── skill-repository/
-│   └── Skill Repository：查重、规范化、入库与导航维护
+│   └── Skill Repository：将已调试满意的 Skill 收录或更新到 Org-Skills
 └── skill-lab/
     └── Skill Lab：测试、调试、回归与持续维护 Skills
 ```
@@ -79,7 +79,7 @@ skills/
 
 | Skill | 解决的问题 | 路径 |
 |---|---|---|
-| [Skill Repository](skills/skill-repository/SKILL.md) | 新 Skill 如何查重、规范化、确定 canonical 路径、保存资源并同步仓库导航 | `skills/skill-repository/SKILL.md` |
+| [Skill Repository](skills/skill-repository/SKILL.md) | 将当前会话中已调试满意的 Skill 查重后收录或更新到 `lovemoganna/Org-Skills`，并同步其 README 导航 | `skills/skill-repository/SKILL.md` |
 | [Skill Lab](skills/skill-lab/SKILL.md) | 测试集经常变化时，如何持续测试、修正和维护 Skills，同时防止针对单一样本过拟合和历史能力回归 | `skills/skill-lab/SKILL.md` |
 
 ## Skills 分工
@@ -97,7 +97,7 @@ Skill Repository
   保持 canonical 包与仓库导航持续一致
 ```
 
-- `Skill Repository` 管“怎么存、存哪、怎么维护 canonical 资产”。
+- `Skill Repository` 管“把已经调试满意的 Skill 收录或更新到 `lovemoganna/Org-Skills`”，不负责重新设计或调试。
 - `Skill Lab` 管“怎么测、怎么改、怎么证明没有改坏”。
 
 ## 使用方式
