@@ -1,429 +1,193 @@
 ---
 name: skill-repository
-description: Archive, deduplicate, normalize, index, and maintain AI Skills in a Git repository without creating duplicate or sample-specific Skill variants.
+description: 收录或更新当前会话中已经调试满意的 Skill。目标仓库固定为 lovemoganna/Org-Skills。负责查重、Canonical 路径、必要资源保存、README 导航同步和回读校验；不负责重新设计或调试 Skill。
 ---
 
 # Skill Repository
 
-## Purpose
+## 用途
 
-Use this Skill to store and maintain AI Skills as long-term repository assets.
+用于收录已经完成开发、反复测试并由用户确认满意的 Skill。
 
-It is responsible for:
+典型场景：用户正在另一个 Skill 会话中开发和调试 Skill。当前版本已经满意。此时调用本 Skill，将当前会话中最终确定的 Skill 收录到 `lovemoganna/Org-Skills`，或更新仓库中已有的同类 Skill。
 
-~~~text
-receive Skill
-→ inspect repository
-→ detect duplicate / overlap
-→ normalize package
-→ choose stable path
-→ archive Skill and resources
-→ update repository map
-→ hand off to Skill Lab for validation when appropriate
-~~~
+本 Skill 只负责收录和更新。它不是 Skill 设计器，也不是 Skill 调试器。
 
-It does not replace `skill-lab`.
+## 默认调用
 
-- **Skill Repository** decides how a Skill enters and lives in the repository.
-- **Skill Lab** decides whether the Skill works, how it should be tested, and whether a change is safe.
+用户表达以下意图时执行：
 
-## Core rule
+```text
+按 Skill Repository 收录当前 Skill
+```
 
-A Skill is not considered archived until:
+也包括语义等价表达，例如“把当前 Skill 收录到 Org-Skills”“更新仓库里的这个 Skill”。
 
-1. repository duplicate checks are complete;
-2. the Skill has one stable canonical location;
-3. required resources are stored with it;
-4. repository navigation is updated;
-5. links and paths are verified.
+## 事实源
 
-Do not create `v2`, `final`, `new`, `fixed`, or sample-specific duplicate Skills when an existing canonical Skill should be updated.
+执行收录前，必须读取 `lovemoganna/Org-Skills` 当前 HEAD。
 
-## Default repository structure
+至少检查：
 
-Prefer:
+1. `README.md`
+2. `MAINTENANCE.md`
+3. `skills/` 当前目录
+4. 与当前 Skill 相同或高度相似的 Skill
+5. 当前 Skill 实际依赖的资源
 
-~~~text
-skills/
-└── <skill-slug>/
-    ├── SKILL.md
-    ├── references/      # only when the Skill actually needs reference files
-    ├── scripts/         # only when executable helpers are required
-    ├── templates/       # only when reusable templates are required
-    ├── tests/           # created when real tests exist
-    │   ├── regression/
-    │   ├── exploratory/
-    │   └── adversarial/
-    ├── eval/            # only when explicit evaluation criteria exist
-    └── CHANGELOG.md     # created when the Skill begins iterative maintenance
-~~~
+仓库当前状态优先于聊天记录中的旧版本、历史附件和本地副本。
 
-Do not create empty directories for appearance.
+## 输入
 
-## Canonical identity
+默认输入是当前会话中用户已经确认满意的最终 Skill。
 
-Each Skill must have one stable identity.
+如果当前会话没有明确的最终 Skill，或者必要资源缺失，不得自行推断、补写或虚构。必须明确指出缺失内容。
 
-Use:
+不得把草稿、中间版本、被用户否定的版本或尚未确认的方案作为最终收录内容。
 
-~~~text
+## 收录流程
+
+### 1. 提取最终 Skill
+
+从当前会话中确定最终版本。
+
+保留已经确认满意的：
+
+1. 行为
+2. 规则
+3. 流程
+4. 约束
+5. 能力边界
+6. 必要资源和引用关系
+
+收录阶段不得重新设计 Skill，不得擅自优化 Skill。
+
+### 2. 检查重复和相似能力
+
+检查 `lovemoganna/Org-Skills` 是否已有相同或高度相似的 Skill。
+
+如果已有对应 Canonical Skill，增量更新现有 Skill。
+
+如果没有对应 Skill，生成稳定的 `skill-slug`，保存到：
+
+```text
 skills/<skill-slug>/SKILL.md
-~~~
+```
 
-The slug should:
+禁止创建以下重复版本：
 
-- describe the Skill's durable capability;
-- use lowercase kebab-case;
-- stay stable across normal revisions;
-- avoid dates, versions, temporary project names, and test-case names.
+```text
+v2
+final
+new
+fixed
+```
 
-Good:
+正常迭代必须持续维护同一个 Canonical Skill。
 
-~~~text
-skill-lab
-sql-business-thinking
-org-literate-engineering
-data-quality-audit
-~~~
+### 3. 保存必要资源
 
-Bad:
+如果当前 Skill 实际依赖以下资源，应与 Skill 一同保存：
 
-~~~text
-skill-v2
-final-skill
-sql-skill-fixed
-dataset-2026-test
-new-analysis-skill
-~~~
+```text
+scripts/
+references/
+assets/
+tests/
+eval/
+CHANGELOG.md
+```
 
-## Archive workflow
+只保存实际存在且被 Skill 使用的资源。
 
-Whenever the user asks to save, archive, add, import, maintain, or put a Skill into the repository, execute the following workflow.
+不得为了目录完整创建空目录或占位文件。
 
-### 1. Read repository state first
+不得丢失原有相对引用关系。
 
-Treat the current repository as the source of truth.
+### 4. 只做收录必需修改
 
-Inspect:
+不得因为仓库规范重新改写已经正确的 Skill 内容。
 
-- current `skills/` tree;
-- root `README.md`;
-- existing Skill names and descriptions;
-- likely overlapping Skills;
-- the target Skill package and referenced resources.
+只允许执行收录所必需的处理，例如：
 
-Do not decide the destination only from conversation memory.
+1. 查重
+2. 确定稳定路径
+3. 保存文件
+4. 修复因移动产生的路径引用
+5. 更新仓库导航
 
-### 2. Identify the Skill's durable capability
+除上述必要处理外，不得改变 Skill 已确认的行为、规则、流程、约束或能力边界。
 
-Reduce the incoming Skill to:
+### 5. 更新 README
 
-~~~text
-What job does this Skill repeatedly perform?
-What inputs does it accept?
-What decisions does it own?
-What outputs does it produce?
-What makes it materially different from existing Skills?
-~~~
+完成 Skill 新增或更新后，必须通篇检查并更新 `lovemoganna/Org-Skills/README.md`。
 
-Use that capability to choose the canonical name and path.
+README 必须继续作为仓库导航地图。
 
-Do not name the Skill after the current test case.
+至少同步：
 
-### 3. Check duplicates and overlap
+1. Skill 名称
+2. 一句话用途
+3. 快速场景入口
+4. Skill 能力地图
+5. Canonical 路径
+6. 相关链接
+7. 与相近 Skill 的能力边界，必要时更新
 
-Before creating a new directory, compare the incoming Skill with existing Skills.
+README 未同步完成时，不得判定收录完成。
 
-Check:
+### 6. 回读校验
 
-- name;
-- description;
-- purpose;
-- workflow;
-- trigger conditions;
-- owned decisions;
-- expected outputs;
-- referenced tools and resources.
+写入后必须重新读取仓库并确认：
 
-Classify the result as:
+1. Canonical `SKILL.md` 已存在
+2. 必要资源已保存
+3. 内部引用有效
+4. README 已包含该 Skill
+5. README 路径与实际仓库一致
+6. 未产生重复 Skill
+7. 未创建无实际内容的目录
+8. 已确认满意的 Skill 行为没有因收录过程被隐性改写
 
-~~~text
-same Skill
-highly overlapping Skill
-complementary Skill
-new Skill
-~~~
+## Skill Lab 边界
 
-#### Same Skill
+不得默认调用 `Skill Lab`。
 
-Update the existing canonical Skill.
+当前场景的前提是 Skill 已经在前面的会话中完成调试并得到用户确认。
 
-Do not create another copy.
+只有用户明确要求以下行为时，才进入 `Skill Lab`：
 
-#### Highly overlapping Skill
+1. 重新测试
+2. 继续优化
+3. 验证行为
+4. 做回归测试
+5. 查找新的 Skill 缺陷
 
-Prefer merging into the existing canonical Skill if both are trying to own the same durable capability.
+## 验收标准
 
-Do not merge only because they share vocabulary.
+必须同时满足：
 
-If merging would destroy a real boundary, keep them separate and make the boundary explicit.
-
-#### Complementary Skill
-
-Keep separate.
-
-Example:
-
-~~~text
-skill-repository = storage and repository lifecycle
-skill-lab        = testing and iterative quality maintenance
-~~~
-
-#### New Skill
-
-Create a new canonical directory.
-
-### 4. Normalize without rewriting valid capability
-
-Preserve the incoming Skill's real behavior.
-
-Only normalize what is necessary for repository consistency:
-
-- stable frontmatter;
-- stable name;
-- clear description;
-- canonical path;
-- broken references;
-- required local resources;
-- obvious duplicated packaging.
-
-Do not rewrite correct Skill logic merely for style consistency.
-
-Do not silently remove constraints, examples, tests, scripts, or reference files that are required by the Skill.
-
-### 5. Archive resources with the Skill
-
-If the Skill depends on local files, store them inside its canonical Skill directory when practical.
-
-Keep relative references valid.
-
-Examples:
-
-~~~text
-skills/<slug>/references/...
-skills/<slug>/scripts/...
-skills/<slug>/templates/...
-~~~
-
-Do not copy unrelated repository files into the Skill directory.
-
-Do not create placeholder resource files.
-
-### 6. Initialize maintenance assets only when justified
-
-A new Skill does not automatically need every maintenance directory.
-
-Create assets when real content exists:
-
-- `tests/exploratory/`: when the user provides active test cases;
-- `tests/regression/`: after a verified defect becomes a historical contract;
-- `tests/adversarial/`: when stress cases are intentionally maintained;
-- `eval/criteria.md`: when explicit quality criteria exist;
-- `CHANGELOG.md`: once the Skill starts accumulating verified maintenance changes.
-
-Never create empty structure only to make the package look mature.
-
-### 7. Update repository navigation
-
-README synchronization is an archive completion condition.
-
-After any Skill is:
-
-- added;
-- updated in a way that changes capability;
-- moved;
-- renamed;
-- merged;
-- split;
-- deleted;
-
-update the root `README.md` against the current repository state.
-
-The README must act as a **Skill navigation map**, not merely a file list.
-
-At minimum keep synchronized:
-
-- quick task entry;
-- Skill name;
-- one-line purpose;
-- canonical path;
-- capability map;
-- boundary between related Skills.
-
-Verify:
-
-- no missing Skill;
-- no duplicate Skill entry;
-- no stale path;
-- no dead link;
-- README matches the actual repository tree.
-
-If README synchronization is incomplete, the archive operation is incomplete.
-
-### 8. Validate the stored package
-
-Before declaring success, verify:
-
-~~~text
-canonical SKILL.md exists
-required resources exist
-relative references resolve
-README contains the Skill
-README path matches repository path
-no accidental duplicate Skill was created
-~~~
-
-When practical, perform a minimal structural smoke test.
-
-If the Skill needs behavioral testing or has just been materially changed, hand it to `skill-lab`.
-
-Use this lifecycle:
-
-~~~text
-Skill Repository
-→ canonical archive
-→ Skill Lab
-→ exploratory test
-→ verified defect
-→ reusable fix
-→ regression
-→ Skill Repository keeps canonical package and navigation current
-~~~
-
-## Updating an existing Skill
-
-When the user provides a revised Skill:
-
-1. find the canonical Skill;
-2. compare the new version with repository HEAD;
-3. preserve correct existing content by default;
-4. apply only intended or evidence-backed changes;
-5. preserve required resources and historical tests;
-6. do not delete regression assets merely because they are absent from the incoming draft;
-7. update README if capability, name, boundary, or path changed;
-8. use Skill Lab when behavioral validation is needed.
-
-## Moving or renaming a Skill
-
-Only rename or move a Skill when there is a real identity or taxonomy problem.
-
-When moving or renaming:
-
-~~~text
-move canonical package
-→ repair internal references
-→ repair external repository references
-→ update README
-→ verify old path is no longer referenced
-~~~
-
-Do not rename a stable Skill merely because the wording can be improved.
-
-## Deleting or merging a Skill
-
-Before deletion or merge, prove that the Skill is:
-
-- duplicate;
-- obsolete;
-- fully superseded;
-- or intentionally consolidated.
-
-Preserve unique capability, tests, references, scripts, and maintenance history before removal.
-
-After deletion or merge:
-
-- remove stale README entries;
-- repair references;
-- verify there is still exactly one canonical owner for the capability.
-
-## User commands
-
-### Archive a new Skill
-
-~~~text
-Use Skill Repository to archive this Skill into AgentComponent.
-
-First inspect the current repository and check for duplicates.
-If a canonical Skill already exists, update it instead of creating a duplicate.
-Preserve required resources.
-Update the README navigation map.
-Then validate the stored package.
-
-Skill:
-【input】
-~~~
-
-### Archive and test
-
-~~~text
-Use Skill Repository to archive this Skill.
-After canonical storage is complete, use Skill Lab to run a smoke / exploratory test.
-Only persist behavioral changes that pass regression and generalization checks.
-~~~
-
-### Update an existing Skill
-
-~~~text
-Use Skill Repository to maintain <skill-name> from the current repository HEAD.
-
-Apply this revision incrementally.
-Do not create another version directory.
-Preserve valid existing resources and regression tests.
-Update README only where repository capability or navigation actually changes.
-~~~
-
-## Output contract
-
-Return only useful maintenance results:
-
-~~~text
-Decision: created / updated / merged / kept separate
-Canonical Skill path
-Resources changed
-README status
-Validation status
-Commit
-Remaining real issue
-~~~
-
-Do not dump low-level repository logs unless requested.
-
-## Success condition
-
-The repository should converge toward:
-
-~~~text
-one durable capability
-        ↓
-one canonical Skill
-        ↓
-one stable path
-        ↓
-resources live with the Skill
-        ↓
-README makes it easy to find
-        ↓
-Skill Lab proves behavior over time
-~~~
-
-Avoid both failure modes:
-
-~~~text
-same capability → many Skill copies
-~~~
-
-and
-
-~~~text
-different capabilities → forced into one giant Skill
-~~~
+1. 用户只需表达“按 Skill Repository 收录当前 Skill”即可触发完整流程。
+2. 同一长期能力只保留一个 Canonical Skill。
+3. 已有 Skill 增量更新；新 Skill 才创建新目录。
+4. 收录后的 Skill 保持用户确认满意时的能力和行为。
+5. 必要资源完整。
+6. 无实际内容的目录不得创建。
+7. 根 `README.md` 与仓库实际状态一致。
+8. README 能让用户快速找到该 Skill。
+9. 最终状态无重复 Skill、无失效引用、路径稳定。
+
+## 输出
+
+完成后只返回：
+
+```text
+操作结果：新增 / 更新
+Canonical Skill 路径
+实际修改的资源
+README 更新状态
+校验结果
+commit
+```
+
+不要输出无关执行日志。
