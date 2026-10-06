@@ -9,6 +9,7 @@
 | 不确定该用文字、表格、图、HTML 还是视频 | [自动选择最佳输出形式](prompts/meta-prompt/select/select-best-output-format.md) | 先判断最省认知成本的输出形式，再直接生成 |
 | 把复杂内容写得更短、更清楚、更容易读懂 | [ASD-STE100 清晰表达](prompts/writing/explain/explain-with-asd-ste100.md) | 用接近 ASD-STE100 的受控表达约束解释复杂内容 |
 | 把已有技术材料写成中英双语 Twitter / X Thread | [Twitter / X 技术 Thread 生成](prompts/writing/generate/generate-twitter-technical-thread.md) | 提炼中心判断，保留真实机制和工作流，生成 8 至 10 条技术 Thread |
+| 把公开加密行业事件转成专业 LinkedIn 风险情报博文 | [LinkedIn 加密风险情报博文生成](prompts/writing/generate/generate-linkedin-crypto-risk-intelligence-post.md) | 先核验事实，再提炼风险机制、业务影响和独立判断，生成中英双语 LinkedIn 内容 |
 | 用流程、因果、结构或关系图解释问题 | [图解优先](prompts/visualization/generate/generate-diagram-first-explainer.md) | 先选最合适的图，再用图解释 |
 | 自主选择最合适的 PlantUML 图来表达流程、依赖、执行计划或性能 | [PlantUML 自主选图](prompts/visualization/generate/select-and-generate-plantuml-diagram.md) | 按关系类型选择 Activity、WBS、Component、Sequence、State、Timing 等图，并直接生成可渲染 PlantUML |
 | 把复杂内容做成可交互解释页面 | [HTML 交互解释器](prompts/visualization/generate/generate-html-explainer.md) | 生成可直接打开的单文件 HTML 解释页面 |
@@ -34,7 +35,8 @@ prompts/
 │   ├── explain/
 │   │   └── ASD-STE100 清晰表达
 │   └── generate/
-│       └── Twitter / X 技术 Thread 生成
+│       ├── Twitter / X 技术 Thread 生成
+│       └── LinkedIn 加密风险情报博文生成
 │
 ├── visualization/
 │   └── generate/
@@ -74,6 +76,7 @@ skills/
 |---|---|---|
 | [ASD-STE100 清晰表达](prompts/writing/explain/explain-with-asd-ste100.md) | 复杂内容太绕、太长、难读 | `prompts/writing/explain/explain-with-asd-ste100.md` |
 | [Twitter / X 技术 Thread 生成](prompts/writing/generate/generate-twitter-technical-thread.md) | 已有技术材料如何压成中英双语 Twitter / X Thread，同时保留真实机制、工作流和独特价值 | `prompts/writing/generate/generate-twitter-technical-thread.md` |
+| [LinkedIn 加密风险情报博文生成](prompts/writing/generate/generate-linkedin-crypto-risk-intelligence-post.md) | 如何把公开加密行业事件、监管与执法材料转成经过事实核验、体现风险机制和业务判断的中英双语 LinkedIn 博文 | `prompts/writing/generate/generate-linkedin-crypto-risk-intelligence-post.md` |
 
 ### Visualization
 
