@@ -8,11 +8,13 @@
 |---|---|---|
 | 不确定该用文字、表格、图、HTML 还是视频 | [自动选择最佳输出形式](prompts/meta-prompt/select/select-best-output-format.md) | 先判断最省认知成本的输出形式，再直接生成 |
 | 把复杂内容写得更短、更清楚、更容易读懂 | [ASD-STE100 清晰表达](prompts/writing/explain/explain-with-asd-ste100.md) | 用接近 ASD-STE100 的受控表达约束解释复杂内容 |
+| 把已有技术材料写成中英双语 Twitter / X Thread | [Twitter / X 技术 Thread 生成](prompts/writing/generate/generate-twitter-technical-thread.md) | 提炼中心判断，保留真实机制和工作流，生成 8 至 10 条技术 Thread |
 | 用流程、因果、结构或关系图解释问题 | [图解优先](prompts/visualization/generate/generate-diagram-first-explainer.md) | 先选最合适的图，再用图解释 |
 | 自主选择最合适的 PlantUML 图来表达流程、依赖、执行计划或性能 | [PlantUML 自主选图](prompts/visualization/generate/select-and-generate-plantuml-diagram.md) | 按关系类型选择 Activity、WBS、Component、Sequence、State、Timing 等图，并直接生成可渲染 PlantUML |
 | 把复杂内容做成可交互解释页面 | [HTML 交互解释器](prompts/visualization/generate/generate-html-explainer.md) | 生成可直接打开的单文件 HTML 解释页面 |
 | 把一个主题做成动态图形讲解视频 | [讲解视频生成](prompts/visualization/generate/generate-explainer-video.md) | 输出分镜、旁白、画面动作和实现方案 |
-| 把模糊想法整理成 Coding Agent 可直接执行的开发需求 | [Vibe Coding 需求表达标准](prompts/coding/specify/write-vibe-coding-requirement.md) | 明确现状、痛点、目标、约束、执行闭环与验收标准 |\n| 把新的高价值 Prompt 规范归档到仓库 | [Prompt 仓库分类与归档](prompts/workflow/maintain/prompt-repository.md) | 查重、分类、命名、入库，并同步维护本 README |
+| 把模糊想法整理成 Coding Agent 可直接执行的开发需求 | [Vibe Coding 需求表达标准](prompts/coding/specify/write-vibe-coding-requirement.md) | 明确现状、痛点、目标、约束、执行闭环与验收标准 |
+| 把新的高价值 Prompt 规范归档到仓库 | [Prompt 仓库分类与归档](prompts/workflow/maintain/prompt-repository.md) | 查重、分类、命名、入库，并同步维护本 README |
 | 把当前会话中已经调试满意的 Skill 收录或更新到 Org-Skills | [Skill Repository](skills/skill-repository/SKILL.md) | 读取 `lovemoganna/Org-Skills` 当前 HEAD，查重后新增或更新 Canonical Skill，并同步 Org-Skills README；不重新设计或调试 Skill |
 | 测试、玩耍、调试和持续维护 AI Skills | [Skill Lab](skills/skill-lab/SKILL.md) | 用 exploratory / regression / adversarial 闭环测试 Skill，修复可泛化缺陷并防止历史能力回归 |
 
@@ -20,13 +22,19 @@
 
 ```text
 prompts/
+├── coding/
+│   └── specify/
+│       └── Vibe Coding 需求表达标准
+│
 ├── meta-prompt/
 │   └── select/
 │       └── 自动选择最佳输出形式
 │
 ├── writing/
-│   └── explain/
-│       └── ASD-STE100 清晰表达
+│   ├── explain/
+│   │   └── ASD-STE100 清晰表达
+│   └── generate/
+│       └── Twitter / X 技术 Thread 生成
 │
 ├── visualization/
 │   └── generate/
@@ -48,7 +56,13 @@ skills/
 
 ## 按能力分类
 
-### Coding\n\n| Prompt | 解决的问题 | 路径 |\n|---|---|---|\n| [Vibe Coding 需求表达标准](prompts/coding/specify/write-vibe-coding-requirement.md) | 把模糊开发想法转换成 Coding Agent 可执行、可验证、可回滚的工程需求 | `prompts/coding/specify/write-vibe-coding-requirement.md` |\n\n### Meta Prompt
+### Coding
+
+| Prompt | 解决的问题 | 路径 |
+|---|---|---|
+| [Vibe Coding 需求表达标准](prompts/coding/specify/write-vibe-coding-requirement.md) | 把模糊开发想法转换成 Coding Agent 可执行、可验证、可回滚的工程需求 | `prompts/coding/specify/write-vibe-coding-requirement.md` |
+
+### Meta Prompt
 
 | Prompt | 解决的问题 | 路径 |
 |---|---|---|
@@ -59,6 +73,7 @@ skills/
 | Prompt | 解决的问题 | 路径 |
 |---|---|---|
 | [ASD-STE100 清晰表达](prompts/writing/explain/explain-with-asd-ste100.md) | 复杂内容太绕、太长、难读 | `prompts/writing/explain/explain-with-asd-ste100.md` |
+| [Twitter / X 技术 Thread 生成](prompts/writing/generate/generate-twitter-technical-thread.md) | 已有技术材料如何压成中英双语 Twitter / X Thread，同时保留真实机制、工作流和独特价值 | `prompts/writing/generate/generate-twitter-technical-thread.md` |
 
 ### Visualization
 
