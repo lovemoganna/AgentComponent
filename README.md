@@ -8,6 +8,7 @@
 |---|---|---|
 | 不确定该用文字、表格、图、HTML 还是视频 | [自动选择最佳输出形式](prompts/meta-prompt/select/select-best-output-format.md) | 先判断最省认知成本的输出形式，再直接生成 |
 | 把复杂内容写得更短、更清楚、更容易读懂 | [ASD-STE100 清晰表达](prompts/writing/explain/explain-with-asd-ste100.md) | 用接近 ASD-STE100 的受控表达约束解释复杂内容 |
+| 核验一个概念并找到真正讲透它的学习资料 | [概念核验与深度学习资料检索](prompts/research/discover/research-concept-learning-materials.md) | 先核验概念名称、定义和来源，再交叉筛选原始、高质量、可学习的资料 |
 | 把已有技术材料写成中英双语 Twitter / X Thread | [Twitter / X 技术 Thread 生成](prompts/writing/generate/generate-twitter-technical-thread.md) | 提炼中心判断，保留真实机制和工作流，生成 8 至 10 条技术 Thread |
 | 把公开加密行业事件转成专业 LinkedIn 风险情报博文 | [LinkedIn 加密风险情报博文生成](prompts/writing/generate/generate-linkedin-crypto-risk-intelligence-post.md) | 先核验事实，再提炼风险机制、业务影响和独立判断，生成中英双语 LinkedIn 内容 |
 | 用流程、因果、结构或关系图解释问题 | [图解优先](prompts/visualization/generate/generate-diagram-first-explainer.md) | 先选最合适的图，再用图解释 |
@@ -30,6 +31,10 @@ prompts/
 ├── meta-prompt/
 │   └── select/
 │       └── 自动选择最佳输出形式
+│
+├── research/
+│   └── discover/
+│       └── 概念核验与深度学习资料检索
 │
 ├── writing/
 │   ├── explain/
@@ -69,6 +74,12 @@ skills/
 | Prompt | 解决的问题 | 路径 |
 |---|---|---|
 | [自动选择最佳输出形式](prompts/meta-prompt/select/select-best-output-format.md) | 不知道当前内容最适合用哪种形式输出 | `prompts/meta-prompt/select/select-best-output-format.md` |
+
+### Research
+
+| Prompt | 解决的问题 | 路径 |
+|---|---|---|
+| [概念核验与深度学习资料检索](prompts/research/discover/research-concept-learning-materials.md) | 概念名称可能不准确时，如何先核验定义和来源，再筛选真正能讲透概念的高质量学习资料 | `prompts/research/discover/research-concept-learning-materials.md` |
 
 ### Writing
 
