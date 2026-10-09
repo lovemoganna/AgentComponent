@@ -11,6 +11,7 @@
 | 核验一个概念并找到真正讲透它的学习资料 | [概念核验与深度学习资料检索](prompts/research/discover/research-concept-learning-materials.md) | 先核验概念名称、定义和来源，再交叉筛选原始、高质量、可学习的资料 |
 | 把已有技术材料写成中英双语 Twitter / X Thread | [Twitter / X 技术 Thread 生成](prompts/writing/generate/generate-twitter-technical-thread.md) | 提炼中心判断，保留真实机制和工作流，生成 8 至 10 条技术 Thread |
 | 把公开加密行业事件转成可直接发布的双语 LinkedIn 风险情报帖子 | [LinkedIn 加密风险情报博文生成](prompts/writing/generate/generate-linkedin-crypto-risk-intelligence-post.md) | 先核验事实，再输出包含原始来源、不超过 3,000 字符的中英双语 LinkedIn 帖子 |
+| 把文章、案例、报告制作成复古笔记本式手绘知识图解 | [手绘知识图解生成器](prompts/visualization/generate/generate-sketchnote-infographic.md) | 直接生成中文 Sketchnote 信息图，自动设计模块、图标、时间轴和流程图 |
 | 用流程、因果、结构或关系图解释问题 | [图解优先](prompts/visualization/generate/generate-diagram-first-explainer.md) | 先选最合适的图，再用图解释 |
 | 自主选择最合适的 PlantUML 图来表达流程、依赖、执行计划或性能 | [PlantUML 自主选图](prompts/visualization/generate/select-and-generate-plantuml-diagram.md) | 按关系类型选择 Activity、WBS、Component、Sequence、State、Timing 等图，并直接生成可渲染 PlantUML |
 | 把复杂内容做成可交互解释页面 | [HTML 交互解释器](prompts/visualization/generate/generate-html-explainer.md) | 生成可直接打开的单文件 HTML 解释页面 |
@@ -46,6 +47,7 @@ prompts/
 ├── visualization/
 │   └── generate/
 │       ├── 图解优先
+│       ├── 手绘知识图解生成器
 │       ├── PlantUML 自主选图
 │       ├── HTML 交互解释器
 │       └── 讲解视频生成
@@ -93,6 +95,7 @@ skills/
 
 | Prompt | 解决的问题 | 路径 |
 |---|---|---|
+| [手绘知识图解生成器](prompts/visualization/generate/generate-sketchnote-infographic.md) | 把真实材料转换成复古笔记本式中文手绘信息图，自动组织模块并保留事实和证据边界 | `prompts/visualization/generate/generate-sketchnote-infographic.md` |
 | [图解优先](prompts/visualization/generate/generate-diagram-first-explainer.md) | 文字不如图容易理解 | `prompts/visualization/generate/generate-diagram-first-explainer.md` |
 | [PlantUML 自主选图](prompts/visualization/generate/select-and-generate-plantuml-diagram.md) | 不知道该用哪种 PlantUML 图表达流程、层级、依赖、交互、状态、SQL 执行计划或性能 | `prompts/visualization/generate/select-and-generate-plantuml-diagram.md` |
 | [HTML 交互解释器](prompts/visualization/generate/generate-html-explainer.md) | 静态文字不足以承载复杂信息 | `prompts/visualization/generate/generate-html-explainer.md` |
