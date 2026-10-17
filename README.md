@@ -7,6 +7,7 @@
 | 你现在要做什么 | 推荐 Prompt | 用途 |
 |---|---|---|
 | 不确定该用文字、表格、图、HTML 还是视频 | [自动选择最佳输出形式](prompts/meta-prompt/select/select-best-output-format.md) | 先判断最省认知成本的输出形式，再直接生成 |
+| 让 Agent 自主执行、验收、定位缺陷、最小修复并回归 | [证据驱动自主闭环 Loop](prompts/meta-prompt/execute/execute-evidence-based-loop.md) | 建立基线、明确验收、反向验证和退出条件，避免无效循环 |
 | 把复杂内容写得更短、更清楚、更容易读懂 | [ASD-STE100 清晰表达](prompts/writing/explain/explain-with-asd-ste100.md) | 用接近 ASD-STE100 的受控表达约束解释复杂内容 |
 | 核验一个概念并找到真正讲透它的学习资料 | [概念核验与深度学习资料检索](prompts/research/discover/research-concept-learning-materials.md) | 先核验概念名称、定义和来源，再交叉筛选原始、高质量、可学习的资料 |
 | 把已有技术材料写成中英双语 Twitter / X Thread | [Twitter / X 技术 Thread 生成](prompts/writing/generate/generate-twitter-technical-thread.md) | 提炼中心判断，保留真实机制和工作流，生成 8 至 10 条技术 Thread |
@@ -30,6 +31,8 @@ prompts/
 │       └── Vibe Coding 需求表达标准
 │
 ├── meta-prompt/
+│   ├── execute/
+│   │   └── 证据驱动自主闭环 Loop
 │   └── select/
 │       └── 自动选择最佳输出形式
 │
@@ -76,6 +79,7 @@ skills/
 | Prompt | 解决的问题 | 路径 |
 |---|---|---|
 | [自动选择最佳输出形式](prompts/meta-prompt/select/select-best-output-format.md) | 不知道当前内容最适合用哪种形式输出 | `prompts/meta-prompt/select/select-best-output-format.md` |
+| [证据驱动自主闭环 Loop](prompts/meta-prompt/execute/execute-evidence-based-loop.md) | 要求 Agent 以实际成果、反向验证、最小修复及回归测试完成任务，而非生成即成功 | `prompts/meta-prompt/execute/execute-evidence-based-loop.md` |
 
 ### Research
 
