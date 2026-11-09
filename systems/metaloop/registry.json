@@ -8,14 +8,102 @@
   "promotion_log": [],
   "prompt_assets": [
     {
+      "path": "prompts/coding/specify/write-vibe-coding-requirement.md",
+      "blob_sha": "bd755956c77900311c56ea103bb636232852032a",
+      "version": "unversioned",
+      "status": "catalogued",
+      "evaluation_status": "not_independently_evaluated"
+    },
+    {
       "path": "prompts/meta-prompt/execute/execute-evidence-based-loop.md",
+      "blob_sha": "188953441f5c54fdb81c7883ad05aa0e15a277fa",
       "version": "v1",
-      "status": "stable"
+      "status": "stable",
+      "evaluation_status": "legacy_version_baseline"
     },
     {
       "path": "prompts/meta-prompt/execute/orchestrate-metaloop.md",
+      "blob_sha": "e87076047facb3a88ad95a6322f06a4cd478b0cc",
       "version": "v0.1",
-      "status": "candidate"
+      "status": "candidate",
+      "evaluation_status": "not_independently_evaluated"
+    },
+    {
+      "path": "prompts/meta-prompt/select/select-best-output-format.md",
+      "blob_sha": "5b6b4902f287253a81e426d8ec649c15faae06aa",
+      "version": "unversioned",
+      "status": "catalogued",
+      "evaluation_status": "not_independently_evaluated"
+    },
+    {
+      "path": "prompts/research/discover/research-concept-learning-materials.md",
+      "blob_sha": "7a55ec0927715cb135d535c2d552822b37b62d21",
+      "version": "unversioned",
+      "status": "catalogued",
+      "evaluation_status": "not_independently_evaluated"
+    },
+    {
+      "path": "prompts/visualization/generate/generate-diagram-first-explainer.md",
+      "blob_sha": "00eee38eebe93a16613400702914a2a5cf836718",
+      "version": "unversioned",
+      "status": "catalogued",
+      "evaluation_status": "not_independently_evaluated"
+    },
+    {
+      "path": "prompts/visualization/generate/generate-explainer-video.md",
+      "blob_sha": "589534f2d8c35d71a365a6c5ab3abf0e5b952400",
+      "version": "unversioned",
+      "status": "catalogued",
+      "evaluation_status": "not_independently_evaluated"
+    },
+    {
+      "path": "prompts/visualization/generate/generate-html-explainer.md",
+      "blob_sha": "d411ed42ade84e7d56934f4c9a40209f7318ec13",
+      "version": "unversioned",
+      "status": "catalogued",
+      "evaluation_status": "not_independently_evaluated"
+    },
+    {
+      "path": "prompts/visualization/generate/generate-sketchnote-infographic.md",
+      "blob_sha": "2772aa342ac60adeded3147149d138374d437004",
+      "version": "unversioned",
+      "status": "catalogued",
+      "evaluation_status": "not_independently_evaluated"
+    },
+    {
+      "path": "prompts/visualization/generate/select-and-generate-plantuml-diagram.md",
+      "blob_sha": "5d03fa46f4425ce6aa7030d3ca4b3e8144e8243b",
+      "version": "unversioned",
+      "status": "catalogued",
+      "evaluation_status": "not_independently_evaluated"
+    },
+    {
+      "path": "prompts/workflow/maintain/prompt-repository.md",
+      "blob_sha": "ea1fd94b5771ac3fc1a925ef80125e4c08830a95",
+      "version": "unversioned",
+      "status": "catalogued",
+      "evaluation_status": "not_independently_evaluated"
+    },
+    {
+      "path": "prompts/writing/explain/explain-with-asd-ste100.md",
+      "blob_sha": "79e888a2783c3c1f556c93561b43f64f4f8c1e1d",
+      "version": "unversioned",
+      "status": "catalogued",
+      "evaluation_status": "not_independently_evaluated"
+    },
+    {
+      "path": "prompts/writing/generate/generate-linkedin-crypto-risk-intelligence-post.md",
+      "blob_sha": "30bf6917a2d5301c4255052a8836407a1812f4ff",
+      "version": "unversioned",
+      "status": "catalogued",
+      "evaluation_status": "not_independently_evaluated"
+    },
+    {
+      "path": "prompts/writing/generate/generate-twitter-technical-thread.md",
+      "blob_sha": "876e08a52bd3db508ccb6c2507b7a5b64f2fa3b4",
+      "version": "unversioned",
+      "status": "catalogued",
+      "evaluation_status": "not_independently_evaluated"
     }
   ]
 }

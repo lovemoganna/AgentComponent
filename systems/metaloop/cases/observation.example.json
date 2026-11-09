@@ -1,0 +1,11 @@
+{
+  "event_id": "SYNTHETIC-DEMO-NOT-A-REAL-RUN",
+  "task_id": "synthetic-one",
+  "domain": "nontechnical",
+  "event_time": "2026-11-10T10:30:00+08:00",
+  "origin": "synthetic",
+  "outcome": "FAIL",
+  "prompt_path": "prompts/writing/explain/explain-with-asd-ste100.md",
+  "failure_code": "missing_fact",
+  "evidence_ref": "artifact:synthetic-example-not-evidence"
+}

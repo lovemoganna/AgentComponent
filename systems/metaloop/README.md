@@ -41,3 +41,25 @@
 ## 分层对抗性测试（第二轮）
 
 新增 test_layer_evaluation.py 覆盖 L1 的直接/顺序/逻辑并行、预算和白名单；L2 的复杂工作流对照与退化；L3 的未复核升级拦截、无历史回滚和 NOOP。首轮基线执行发现两个问题：复杂流程对比依赖缺失 operation 而崩溃；内部 6 例通过即自动升级。两处已做最小修复。是否完整回归通过，以本 PR Actions 原始结果为准。
+
+## 主动发现与反馈闭环（Active Learning）
+
+已实现 \`lifecycle.py\`，不使用外部模型 API，不会静默改写 Prompt。扫描完整 \`prompts/\` 清单，核对唯一 Registry 的 **路径、状态和 Git Blob SHA**，并通过 CI 防止新增/修改 Prompt 遗漏登记。未做独立评测的旧提示标记为 \`catalogued\`，**不冒充 stable**；原有 stable/candidate 标识保持不变。
+
+运行（仍由本仓库的 GitHub Actions 自动测试，无需用户手动执行）：
+
+    python systems/metaloop/lifecycle.py audit --strict
+    python systems/metaloop/lifecycle.py report
+    python systems/metaloop/lifecycle.py record --event event.json --events path-outside-repo/observations.jsonl
+    python systems/metaloop/lifecycle.py report --events path-outside-repo/observations.jsonl
+
+记录最少字段：\`event_id, task_id, domain, event_time(含时区), origin(real/synthetic), outcome, evidence_ref\`，以及 \`prompt_path\` 或 \`need_key\` 二选一。失败加 \`failure_code\`。只保存引用 ID、分类和可选时间/费用，不接收原始消息、客户资料、任意额外字段。请勿将含隐私/敏感资料的 JSONL 推送到仓库。示例模板 \`cases/observation.example.json\` 明确为 synthetic，不能作为真实运行成绩。
+
+- **主动试用规划**：在缺少已观察任务的情况下，从现有 Prompt 自动选择一项技术任务方向与一项非技术任务方向，生成 `probe_plan`，状态必须为 `PLANNED_NOT_RUN`；由定时任务寻找真实输入、执行并保存证据后才可登记运行结果。
+- **发现**：同一缺陷在至少两个不同真实任务重复出现 → 生成修复候选；相同未满足能力需求在两个任务出现 → 新能力候选。
+- **复用**：同一 Prompt 在至少两个任务、两个领域有成功记录 → 产生跨域迁移测试候选；绝不据此宣布已经可靠迁移。
+- **治理**：四个不同真实任务中至少三个失败 → 仅提出人工退役审查，不自动删除。使用记录缺失绝不等同低价值。
+- **验证**：即使事件写作 real，程序也不能凭字符串验证外部证据真实性；报告统一标识 \`evidence_authentication: NOT_PERFORMED\`。候选升级沿用原 \`engine.py\` 人工及独立 held-out 门禁。
+- **边界**：当前自动化不具备读取全部个人聊天的权限。每小时巡检可发现仓库内容问题，但真实任务反馈必须来自实际执行产物/可靠记录，缺失时继续报告证据缺口，不能生成虚假进步。
+
+首次审计可观察事实：main 基线的 \`prompts/\` 有 **14 个** Markdown Prompt，原 Registry 只覆盖两个。补齐目录后，新增 Prompt 自动登记门禁。后续优先对一个真实技术任务和一个真实非技术任务保存初始结果，并由外部可复查结果或独立审查者确认。
