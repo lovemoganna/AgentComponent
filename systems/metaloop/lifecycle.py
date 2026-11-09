@@ -130,10 +130,18 @@ def discover(events, registry):
     for key, group in sorted(usages.items()):
         if key.startswith("need:"):
             continue
-        unique = {e["task_id"]:e for e in group}
-        if len(unique) >= 4 and sum(e["outcome"]=="FAIL" for e in unique.values()) >= 3:
+        # A task is a failure only when all its observations are FAIL.
+        # A later PASS, BLOCKED or UNKNOWN must not be overwritten by file order.
+        by_task = defaultdict(list)
+        for e in group:
+            by_task[e["task_id"]].append(e)
+        failed_tasks = {task for task, observations in by_task.items()
+                        if all(e["outcome"] == "FAIL" for e in observations)}
+        if len(by_task) >= 4 and len(failed_tasks) >= 3:
             opportunities.append(dict(kind="retirement_review_only", key=key,
-              distinct_tasks=len(unique), evidence_refs=sorted({e["evidence_ref"] for e in unique.values()}),
+              distinct_tasks=len(by_task),
+              failed_distinct_tasks=len(failed_tasks),
+              evidence_refs=sorted({e["evidence_ref"] for e in group}),
               status="not_authorized_to_delete",
               next_action="check coverage/confounders and request human retirement decision"))
         passes = [e for e in group if e["outcome"]=="PASS"]
