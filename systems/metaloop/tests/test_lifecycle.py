@@ -96,6 +96,26 @@ class LifecycleTests(unittest.TestCase):
         self.assertTrue(any(x["kind"]=="retirement_review_only" for x in out["opportunities"]))
         self.assertFalse(any(x["status"]=="deleted" for x in out["opportunities"]))
 
+    def test_retirement_does_not_depend_on_event_order(self):
+        base=[event("a","one"),event("b","two"),event("c","three"),
+              event("d","four","PASS")]
+        conflicting=event("e","one","PASS")
+        first=discover(base+[conflicting],REGISTRY)
+        second=discover([conflicting]+base,REGISTRY)
+        for report in (first,second):
+            self.assertFalse(any(x["kind"]=="retirement_review_only"
+                                 for x in report["opportunities"]))
+
+    def test_retirement_counts_distinct_failed_tasks(self):
+        base=[event("a","one"),event("b","two"),event("c","three"),
+              event("d","four","PASS"),event("e","one")]
+        report=discover(base,REGISTRY)
+        retirement=[x for x in report["opportunities"]
+                    if x["kind"]=="retirement_review_only"]
+        self.assertEqual(len(retirement),1)
+        self.assertEqual(retirement[0]["failed_distinct_tasks"],3)
+        self.assertEqual(retirement[0]["distinct_tasks"],4)
+
     def test_reject_raw_user_content(self):
         x=event("a","one")
         x["raw_prompt"]="sensitive data"
