@@ -8,6 +8,7 @@
 |---|---|---|
 | 不确定该用文字、表格、图、HTML 还是视频 | [自动选择最佳输出形式](prompts/meta-prompt/select/select-best-output-format.md) | 先判断最省认知成本的输出形式，再直接生成 |
 | 让 Agent 自主执行、验收、定位缺陷、最小修复并回归 | [证据驱动自主闭环 Loop](prompts/meta-prompt/execute/execute-evidence-based-loop.md) | 建立基线、明确验收、反向验证和退出条件，避免无效循环 |
+| 将各领域任务编排为可执行、可评测、可复用的三级复利工作流 | [MetaLoop 通用元提示](prompts/meta-prompt/execute/orchestrate-metaloop.md) | 通用任务协议、路由、候选升级门槛；仅通过独立回归才正式升级 |
 | 把复杂内容写得更短、更清楚、更容易读懂 | [ASD-STE100 清晰表达](prompts/writing/explain/explain-with-asd-ste100.md) | 用接近 ASD-STE100 的受控表达约束解释复杂内容 |
 | 核验一个概念并找到真正讲透它的学习资料 | [概念核验与深度学习资料检索](prompts/research/discover/research-concept-learning-materials.md) | 先核验概念名称、定义和来源，再交叉筛选原始、高质量、可学习的资料 |
 | 把已有技术材料写成中英双语 Twitter / X Thread | [Twitter / X 技术 Thread 生成](prompts/writing/generate/generate-twitter-technical-thread.md) | 提炼中心判断，保留真实机制和工作流，生成 8 至 10 条技术 Thread |
@@ -32,7 +33,8 @@ prompts/
 │
 ├── meta-prompt/
 │   ├── execute/
-│   │   └── 证据驱动自主闭环 Loop
+│   │   ├── 证据驱动自主闭环 Loop
+│   │   └── MetaLoop 通用元提示编排
 │   └── select/
 │       └── 自动选择最佳输出形式
 │
@@ -80,6 +82,7 @@ skills/
 |---|---|---|
 | [自动选择最佳输出形式](prompts/meta-prompt/select/select-best-output-format.md) | 不知道当前内容最适合用哪种形式输出 | `prompts/meta-prompt/select/select-best-output-format.md` |
 | [证据驱动自主闭环 Loop](prompts/meta-prompt/execute/execute-evidence-based-loop.md) | 要求 Agent 以实际成果、反向验证、最小修复及回归测试完成任务，而非生成即成功 | `prompts/meta-prompt/execute/execute-evidence-based-loop.md` |
+| [MetaLoop 通用元提示](prompts/meta-prompt/execute/orchestrate-metaloop.md) | 多任务编排、Workflow/Meta Loop、独立评测和版本回滚 | `prompts/meta-prompt/execute/orchestrate-metaloop.md` |
 
 ### Research
 
@@ -110,6 +113,12 @@ skills/
 | Prompt | 解决的问题 | 路径 |
 |---|---|---|
 | [Prompt 仓库分类与归档](prompts/workflow/maintain/prompt-repository.md) | 新 Prompt 如何查重、分类、命名和持续维护 | `prompts/workflow/maintain/prompt-repository.md` |
+
+## 可运行元系统
+
+| 项目 | 能力 | 路径 |
+|---|---|---|
+| [MetaLoop MVP](systems/metaloop/README.md) | 确定性任务执行、有限修复、跨域样例回归、候选评估、回滚；尚非模型效果证明 | `systems/metaloop/` |
 
 ## Skills
 
