@@ -118,7 +118,7 @@ skills/
 
 | 项目 | 能力 | 路径 |
 |---|---|---|
-| [MetaLoop MVP](systems/metaloop/README.md) | 确定性任务执行、有限修复、跨域样例回归、候选评估、回滚；尚非模型效果证明 | `systems/metaloop/` |
+| [MetaLoop MVP 与能力反馈闭环](systems/metaloop/README.md) | 完整 Prompt Registry、真实反馈记录、重复缺陷发现、复用候选、退役审查、保守升级及回滚；不假称模型效果证明 | `systems/metaloop/` |
 
 ## Skills
 

@@ -3,6 +3,8 @@ on:
   pull_request:
     paths:
       - 'systems/metaloop/**'
+      - 'prompts/**'
+      - 'README.md'
       - 'prompts/meta-prompt/execute/orchestrate-metaloop.md'
       - '.github/workflows/metaloop-regression.yml'
   push:
@@ -22,3 +24,7 @@ jobs:
         run: python -m unittest discover -s systems/metaloop/tests -v
       - name: Compare candidate and stable
         run: python systems/metaloop/engine.py compare
+      - name: Audit complete prompt registry and frozen blob SHA
+        run: python systems/metaloop/lifecycle.py audit --strict
+      - name: Discover observations with explicit empty evidence
+        run: python systems/metaloop/lifecycle.py report
