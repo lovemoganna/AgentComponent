@@ -93,7 +93,7 @@ def compare(suite, baseline, candidate):
     rows = []
     for case in cases:
         task = {k: deepcopy(v) for k,v in case.items() if k != 'domain'}
-        alias = task['operation'] == 'normalize_alias'
+        alias = task.get('operation') == 'normalize_alias'
         b = execute(task, operation=baseline if alias else None)
         c = execute(task, operation=candidate if alias else None)
         rows.append(dict(id=case['id'], domain=case['domain'], baseline=b['status'],
@@ -105,7 +105,12 @@ def compare(suite, baseline, candidate):
                 candidate_pass=sum(r['candidate']=='PASS' for r in rows),
                 cases=rows, independent_model_judge=False)
 
-def promotion(registry, suite):
+def promotion(registry, suite, review=None):
+    """Gate an in-sample deterministic gain on separate heldout replay and human signoff.
+
+    The program validates evidence STRUCTURE and outcomes; it cannot authenticate
+    a reviewer or independently prove that a review artifact is genuine.
+    """
     state = deepcopy(registry)
     stable = state['text_normalization']['stable']
     candidate = state['text_normalization']['candidate']
@@ -114,13 +119,35 @@ def promotion(registry, suite):
     report = compare(suite, stable, candidate)
     if not report['promotable']:
         return dict(promoted=False, reason='no gain or regression', report=report, registry=state)
+    if not isinstance(review, dict) or not (
+        review.get('approved') is True and review.get('reviewer_type') == 'human'
+        and isinstance(review.get('reviewer_id'), str) and review['reviewer_id'].strip()
+        and isinstance(review.get('evidence_ref'), str) and review['evidence_ref'].strip()
+        and isinstance(review.get('heldout_suite'), dict)
+    ):
+        return dict(promoted=False, reason='independent heldout and human review required',
+                    report=report, registry=state)
+    heldout = review['heldout_suite']
+    digest = hashlib.sha256(json.dumps(suite, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+    heldout_digest = hashlib.sha256(json.dumps(heldout, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+    original_ids = {x['id'] for x in suite['cases']}
+    if heldout_digest == digest or original_ids.intersection(x['id'] for x in heldout.get('cases', [])):
+        return dict(promoted=False, reason='heldout overlaps development cases',
+                    report=report, registry=state)
+    heldout_report = compare(heldout, stable, candidate)
+    if not heldout_report['promotable']:
+        return dict(promoted=False, reason='no heldout gain or regression',
+                    report=report, heldout_report=heldout_report, registry=state)
     state.setdefault('history', []).append(stable)
     state['text_normalization']['stable'] = candidate
-    digest = hashlib.sha256(json.dumps(suite, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
     state.setdefault('promotion_log', []).append(dict(source=stable, target=candidate,
-        suite_sha256=digest, baseline_pass=report['baseline_pass'],
-        candidate_pass=report['candidate_pass']))
-    return dict(promoted=True, report=report, registry=state)
+        suite_sha256=digest, heldout_suite_sha256=heldout_digest,
+        baseline_pass=report['baseline_pass'], candidate_pass=report['candidate_pass'],
+        heldout_baseline_pass=heldout_report['baseline_pass'],
+        heldout_candidate_pass=heldout_report['candidate_pass'],
+        reviewer_id=review['reviewer_id'], evidence_ref=review['evidence_ref'],
+        reviewer_type=review['reviewer_type']))
+    return dict(promoted=True, report=report, heldout_report=heldout_report, registry=state)
 
 def rollback(registry):
     state = deepcopy(registry)
@@ -137,6 +164,7 @@ def main():
     p.add_argument('--registry', type=Path)
     p.add_argument('--journal', type=Path)
     p.add_argument('--write', action='store_true')
+    p.add_argument('--review', type=Path, help='human-approved review JSON with disjoint heldout suite')
     args = p.parse_args()
     root = Path(__file__).resolve().parent
     registry_file = args.registry or root/'registry.json'
@@ -151,7 +179,8 @@ def main():
         result = compare(json.loads(suite_file.read_text(encoding='utf-8')),
                          state['text_normalization']['stable'], state['text_normalization']['candidate'])
     elif args.command == 'promote':
-        result = promotion(state, json.loads(suite_file.read_text(encoding='utf-8')))
+        review = json.loads(args.review.read_text(encoding='utf-8')) if args.review else None
+        result = promotion(state, json.loads(suite_file.read_text(encoding='utf-8')), review)
         if args.write and result['promoted']:
             registry_file.write_text(json.dumps(result['registry'], ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     else:

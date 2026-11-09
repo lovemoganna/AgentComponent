@@ -17,12 +17,36 @@ class MetaLoopTests(unittest.TestCase):
         self.assertTrue(r['promotable'])
         self.assertFalse(r['independent_model_judge'])
 
+    @staticmethod
+    def synthetic_review():
+        # Fixture checks the plumbing; it is NOT genuine external approval.
+        return {
+            'approved': True, 'reviewer_type': 'human',
+            'reviewer_id': 'fixture-only-no-real-human-review',
+            'evidence_ref': 'fixture://test-evidence-not-real',
+            'heldout_suite': {'cases': [
+                {'id':'h1','domain':'nontechnical-writing','operation':'normalize_alias',
+                 'input':'新版\u00a0描述','expected':'新版 描述'},
+                {'id':'h2','domain':'nontechnical-writing','operation':'normalize_alias',
+                 'input':'旧版   正常','expected':'旧版 正常'},
+                {'id':'h3','domain':'technical-analysis','operation':'percentage_drop',
+                 'input':{'high':200.0,'low':180.0},'expected':10.0},
+            ]}
+        }
+
     def test_promotion_and_rollback(self):
-        r = promotion(REGISTRY, SUITE)
+        r = promotion(REGISTRY, SUITE, self.synthetic_review())
         self.assertTrue(r['promoted'])
         self.assertEqual(r['registry']['text_normalization']['stable'], 'normalize_unicode')
         self.assertEqual(rollback(r['registry'])['text_normalization']['stable'], 'normalize_ascii')
         self.assertEqual(REGISTRY['text_normalization']['stable'], 'normalize_ascii')
+
+    def test_same_suite_cannot_count_as_independent_review(self):
+        review = self.synthetic_review()
+        review['heldout_suite'] = SUITE
+        result = promotion(REGISTRY, SUITE, review)
+        self.assertFalse(result['promoted'])
+        self.assertEqual(result['reason'], 'heldout overlaps development cases')
 
     def test_no_gain_rejected(self):
         r = dict(REGISTRY, text_normalization={'stable':'normalize_unicode','candidate':'normalize_unicode'})
