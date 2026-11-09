@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "text_normalization": {
+    "stable": "normalize_ascii",
+    "candidate": "normalize_unicode"
+  },
+  "history": [],
+  "promotion_log": [],
+  "prompt_assets": [
+    {
+      "path": "prompts/meta-prompt/execute/execute-evidence-based-loop.md",
+      "version": "v1",
+      "status": "stable"
+    },
+    {
+      "path": "prompts/meta-prompt/execute/orchestrate-metaloop.md",
+      "version": "v0.1",
+      "status": "candidate"
+    }
+  ]
+}

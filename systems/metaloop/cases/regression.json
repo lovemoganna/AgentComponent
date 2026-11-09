@@ -1,0 +1,54 @@
+{
+  "suite_id": "metaloop-mvp-2026-11-09-frozen",
+  "purpose": "Deterministic adapter checks; not LLM evaluation",
+  "cases": [
+    {
+      "id": "text_unicode_nbsp",
+      "domain": "nontechnical-writing",
+      "operation": "normalize_alias",
+      "input": "事实 优先",
+      "expected": "事实 优先"
+    },
+    {
+      "id": "text_ascii_regression",
+      "domain": "nontechnical-writing",
+      "operation": "normalize_alias",
+      "input": "表达   清楚",
+      "expected": "表达 清楚"
+    },
+    {
+      "id": "text_identity_regression",
+      "domain": "nontechnical-writing",
+      "operation": "normalize_alias",
+      "input": "如实陈述",
+      "expected": "如实陈述"
+    },
+    {
+      "id": "numeric_technical",
+      "domain": "technical-analysis",
+      "operation": "percentage_drop",
+      "input": {
+        "high": 28.46,
+        "low": 25.6
+      },
+      "expected": 10.0492
+    },
+    {
+      "id": "json_technical",
+      "domain": "technical-analysis",
+      "operation": "json_lookup",
+      "input": {
+        "document": "{\"checks\":{\"ok\":true}}",
+        "path": "checks.ok"
+      },
+      "expected": true
+    },
+    {
+      "id": "dedupe_nontechnical",
+      "domain": "nontechnical-writing",
+      "operation": "dedupe_lines",
+      "input": "观察\n观察\n推断",
+      "expected": "观察\n推断"
+    }
+  ]
+}

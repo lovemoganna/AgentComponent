@@ -1,0 +1,24 @@
+name: MetaLoop regression
+on:
+  pull_request:
+    paths:
+      - 'systems/metaloop/**'
+      - 'prompts/meta-prompt/execute/orchestrate-metaloop.md'
+      - '.github/workflows/metaloop-regression.yml'
+  push:
+    paths:
+      - 'systems/metaloop/**'
+      - '.github/workflows/metaloop-regression.yml'
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Deterministic regression
+        run: python -m unittest discover -s systems/metaloop/tests -v
+      - name: Compare candidate and stable
+        run: python systems/metaloop/engine.py compare
