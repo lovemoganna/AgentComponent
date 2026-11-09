@@ -6,7 +6,7 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[3]
 sys.path.insert(0,str(ROOT/"systems/metaloop"))
-from lifecycle import audit_registry, blob_sha, discover, run_report, validate_event, read_events
+from lifecycle import audit_registry, blob_sha, discover, run_report, validate_event, read_events, plan_probes
 
 REGISTRY=json.loads((ROOT/"systems/metaloop/registry.json").read_text(encoding="utf-8"))
 
@@ -24,6 +24,20 @@ def event(event_id, task_id, outcome="FAIL", path="prompts/writing/explain/expla
     return e
 
 class LifecycleTests(unittest.TestCase):
+    def test_probes_cover_technical_and_nontechnical(self):
+        plan=plan_probes(REGISTRY,[])
+        self.assertEqual({x["track"] for x in plan},{"technical","nontechnical"})
+        self.assertTrue(all(x["status"]=="PLANNED_NOT_RUN" for x in plan))
+        self.assertTrue(all(x["observed_distinct_tasks"]==0 for x in plan))
+
+    def test_probes_shift_to_less_observed_asset(self):
+        original=plan_probes(REGISTRY,[])
+        writing=next(x for x in original if x["track"]=="nontechnical")
+        observed=event("w1","actual_task_1","PASS",path=writing["prompt_path"])
+        changed=plan_probes(REGISTRY,[observed])
+        self.assertNotEqual(writing["prompt_path"],
+          next(x for x in changed if x["track"]=="nontechnical")["prompt_path"])
+
     def test_registry_complete_and_hash_frozen(self):
         audit=audit_registry(ROOT,REGISTRY)
         self.assertEqual(audit["status"],"PASS",audit["errors"])
