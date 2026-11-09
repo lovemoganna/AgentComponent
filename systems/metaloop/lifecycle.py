@@ -151,10 +151,32 @@ def discover(events, registry):
             "decision": "NO_EVIDENCE" if not real else "REVIEW_ONLY",
             "zero_usage_cannot_establish_low_value": True}
 
+def plan_probes(registry, events):
+    """Suggest, never execute, one technical and one nontechnical real-world trial."""
+    usage=defaultdict(set)
+    for e in events:
+        if e["origin"]=="real" and e.get("prompt_path"):
+            usage[e["prompt_path"]].add(e["task_id"])
+    domains={"technical":{"coding","data-analysis","debugging"},
+             "nontechnical":{"writing","research"}}
+    plan=[]
+    for group, folders in domains.items():
+        eligible=[x for x in registry["prompt_assets"]
+                  if x["status"]!="deprecated" and x["path"].split("/")[1] in folders]
+        eligible.sort(key=lambda x:(len(usage[x["path"]]), x["path"]))
+        if eligible:
+            chosen=eligible[0]
+            plan.append({"track":group,"prompt_path":chosen["path"],
+                         "observed_distinct_tasks":len(usage[chosen["path"]]),
+                         "status":"PLANNED_NOT_RUN",
+                         "required": "source an actual task; retain output and independent outcome evidence"})
+    return plan
+
 def run_report(root, registry, events):
     audit = audit_registry(root, registry)
     feedback = discover(events, registry)
-    return {"audit": audit, "feedback": feedback, "production_prompt_changed": False,
+    return {"audit": audit, "feedback": feedback, "probe_plan": plan_probes(registry, events),
+            "production_prompt_changed": False,
             "next_priority": ("repair registry mismatch" if audit["errors"]
                 else "collect real cross-domain execution evidence with provenance"
                 if not feedback["reported_real_events"] else
