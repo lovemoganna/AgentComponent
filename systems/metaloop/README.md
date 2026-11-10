@@ -63,3 +63,18 @@
 - **边界**：当前自动化不具备读取全部个人聊天的权限。每小时巡检可发现仓库内容问题，但真实任务反馈必须来自实际执行产物/可靠记录，缺失时继续报告证据缺口，不能生成虚假进步。
 
 首次审计可观察事实：main 基线的 \`prompts/\` 有 **14 个** Markdown Prompt，原 Registry 只覆盖两个。补齐目录后，新增 Prompt 自动登记门禁。后续优先对一个真实技术任务和一个真实非技术任务保存初始结果，并由外部可复查结果或独立审查者确认。
+
+## 大规模 Prompt 的限额轮巡（增量巡检）
+
+每小时运行时，先做一次 Git Tree + Registry 的轻量库存检查（路径、Blob SHA、状态）；**不要把整个库的 Prompt 正文逐条塞进同一模型上下文**。只有 Git Blob SHA 变动、实际失败、高风险任务命中，或本轮轮到的 Prompt 才进入深检。
+
+`lifecycle.py report` 的 `probe_plan` 现按 UTC 整点确定性轮换，默认只给出技术、非技术各一项（总量最多两项）；覆盖 Coding、Meta Prompt、Workflow、Research、Writing、Visualization，新增目录默认并入非技术轮巡，不会被遗漏。没有真实反馈也会每小时切换目标，不再永久卡在字典序前两个 Prompt。所有输出依旧标为 `PLANNED_NOT_RUN`，**只表示排队，不代表已读、已运行或质量达标**。
+
+    python systems/metaloop/lifecycle.py report
+    python systems/metaloop/lifecycle.py report --slot 0 --max-items 2
+    python systems/metaloop/lifecycle.py report --changed-path prompts/coding/specify/write-vibe-coding-requirement.md --max-items 2
+
+`--slot` 是可复现的 UTC 整点序号（省略时使用当前 UTC 小时）。`--max-items` 可设 1 或 2。已确认变更的路径使用 `--changed-path` 指定并优先占据一个名额，另一个名额留给未充分观察的资产；代码拒绝不存在的路径和超预算请求。无变更时，每个技术/非技术分组独立轮换。调度依据 Registry 路径，不保存原始用户数据，也不每小时写入游标提交；跨时段中断不代表资产已测试。
+
+**成本与证据分层**：Git Tree/Registry SHA 审计是库存覆盖；按轮巡实际读取并核查正文才是内容审查覆盖；只有真实任务、固定输入和原始输出引用，加上独立复核，才是有证据的模型评测覆盖。记录 `origin=real` 并不构成独立核验。未实测项目不计成功率；旧 SHA 的实测记录不能替换新 SHA 的结论。遇到权限/时间预算时跳过并说明延期，不调用外部模型 API。Candidate 仍须跨域 held-out 的独立对照和版本门禁。
+

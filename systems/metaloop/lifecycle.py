@@ -159,31 +159,78 @@ def discover(events, registry):
             "decision": "NO_EVIDENCE" if not real else "REVIEW_ONLY",
             "zero_usage_cannot_establish_low_value": True}
 
-def plan_probes(registry, events):
-    """Suggest, never execute, one technical and one nontechnical real-world trial."""
-    usage=defaultdict(set)
+def plan_probes(registry, events, slot=None, max_items=2, changed_paths=()):
+    """Bounded, rotating *plans*, never proof that an evaluation ran.
+
+    Stable UTC-hour slots rotate even with zero observations; changed assets use
+    at most one urgent seat, leaving the other seat for coverage. This function
+    never executes a prompt, measures latency, or authenticates evidence.
+    """
+    from datetime import timezone
+    if slot is None:
+        slot = int(datetime.now(timezone.utc).timestamp() // 3600)
+    if type(slot) is not int or slot < 0:
+        raise ValueError("slot must be a non-negative UTC hour index")
+    if type(max_items) is not int or not 1 <= max_items <= 2:
+        raise ValueError("max_items must be 1 or 2")
+
+    usage = defaultdict(set)
     for e in events:
-        if e["origin"]=="real" and e.get("prompt_path"):
+        if e["origin"] == "real" and e.get("prompt_path"):
             usage[e["prompt_path"]].add(e["task_id"])
-    domains={"technical":{"coding","data-analysis","debugging"},
-             "nontechnical":{"writing","research"}}
-    plan=[]
-    for group, folders in domains.items():
-        eligible=[x for x in registry["prompt_assets"]
-                  if x["status"]!="deprecated" and x["path"].split("/")[1] in folders]
-        eligible.sort(key=lambda x:(len(usage[x["path"]]), x["path"]))
-        if eligible:
-            chosen=eligible[0]
-            plan.append({"track":group,"prompt_path":chosen["path"],
-                         "observed_distinct_tasks":len(usage[chosen["path"]]),
-                         "status":"PLANNED_NOT_RUN",
-                         "required": "source an actual task; retain output and independent outcome evidence"})
+
+    assets = {a["path"]: a for a in registry["prompt_assets"]
+              if a["status"] != "deprecated"}
+    unknown = set(changed_paths) - set(assets)
+    if unknown:
+        raise ValueError("unknown changed paths: " + ", ".join(sorted(unknown)))
+
+    def track(path):
+        domain = path.split("/")[1]
+        return "technical" if domain in {"coding", "meta-prompt", "workflow"} else "nontechnical"
+
+    plan, chosen = [], set()
+    def add(path, reason):
+        if path in chosen or len(plan) >= max_items:
+            return
+        chosen.add(path)
+        item = assets[path]
+        plan.append({"track": track(path), "prompt_path": path,
+                     "blob_sha": item["blob_sha"],
+                     "observed_distinct_tasks": len(usage[path]),
+                     "selection_slot_utc_hour": slot, "reason": reason,
+                     "status": "PLANNED_NOT_RUN",
+                     "required": "run a real task with retained output and independently verifiable outcome"})
+
+    changed = sorted(set(changed_paths))
+    if changed:
+        add(changed[slot % len(changed)], "changed_asset_priority")
+
+    def choose(paths, reason):
+        options = sorted(p for p in paths if p not in chosen)
+        if not options:
+            return
+        least = min(len(usage[p]) for p in options)
+        equally_due = [p for p in options if len(usage[p]) == least]
+        add(equally_due[slot % len(equally_due)], reason)
+
+    if not changed and max_items == 2:
+        # One seat from each track. Each track advances hourly and all members
+        # are visited, even when there is no feedback evidence.
+        for group in ("technical", "nontechnical"):
+            choose([p for p in assets if track(p) == group], "rotating_coverage")
+    if len(plan) < max_items:
+        # If a changed asset consumed a seat, reserve one for *all* other
+        # assets, not only the same track: repeated changes cannot monopolize.
+        choose(assets, "rotating_coverage")
+    if len(plan) < max_items:
+        choose(assets, "rotating_coverage")
     return plan
 
-def run_report(root, registry, events):
+def run_report(root, registry, events, slot=None, max_items=2, changed_paths=()):
     audit = audit_registry(root, registry)
     feedback = discover(events, registry)
-    return {"audit": audit, "feedback": feedback, "probe_plan": plan_probes(registry, events),
+    return {"audit": audit, "feedback": feedback, "probe_plan": plan_probes(registry, events, slot, max_items, changed_paths),
             "production_prompt_changed": False,
             "next_priority": ("repair registry mismatch" if audit["errors"]
                 else "collect real cross-domain execution evidence with provenance"
@@ -198,6 +245,9 @@ def main():
     p.add_argument("--events",type=Path,help="explicit JSONL observations path")
     p.add_argument("--event",type=Path,help="a single event JSON for record")
     p.add_argument("--strict",action="store_true")
+    p.add_argument("--slot",type=int,help="UTC hour index; default is current UTC hour")
+    p.add_argument("--max-items",type=int,default=2,help="maximum planned deep reviews (1 or 2)")
+    p.add_argument("--changed-path",action="append",default=[],help="confirmed changed Prompt path; repeatable")
     args=p.parse_args()
     registry=json.loads((args.registry or args.root/"systems/metaloop/registry.json").read_text(encoding="utf-8"))
     if args.command == "record":
@@ -215,7 +265,8 @@ def main():
     elif args.command=="audit":
         result=audit_registry(args.root,registry)
     else:
-        result=run_report(args.root,registry,read_events(args.events,registry))
+        result=run_report(args.root,registry,read_events(args.events,registry),
+                          args.slot,args.max_items,args.changed_path)
     print(json.dumps(result,ensure_ascii=False,indent=2))
     if args.strict and result.get("status",result.get("audit",{}).get("status"))=="FAIL":
         raise SystemExit(1)

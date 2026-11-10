@@ -38,6 +38,51 @@ class LifecycleTests(unittest.TestCase):
         self.assertNotEqual(writing["prompt_path"],
           next(x for x in changed if x["track"]=="nontechnical")["prompt_path"])
 
+    def test_hourly_rotation_covers_all_registry_assets_without_feedback(self):
+        assets={x["path"] for x in REGISTRY["prompt_assets"] if x["status"]!="deprecated"}
+        selected=set()
+        for slot in range(len(assets)):
+            batch=plan_probes(REGISTRY,[],slot=slot)
+            self.assertLessEqual(len(batch),2)
+            self.assertTrue(all(p["status"]=="PLANNED_NOT_RUN" for p in batch))
+            selected.update(p["prompt_path"] for p in batch)
+        self.assertEqual(selected,assets)
+
+    def test_changed_priority_cannot_starve_other_assets(self):
+        assets={x["path"] for x in REGISTRY["prompt_assets"] if x["status"]!="deprecated"}
+        changed="prompts/writing/explain/explain-with-asd-ste100.md"
+        selected=set()
+        for slot in range(len(assets)*2):
+            batch=plan_probes(REGISTRY,[],slot=slot,changed_paths=[changed])
+            self.assertEqual(len(batch),2)
+            self.assertEqual(batch[0]["prompt_path"],changed)
+            selected.update(p["prompt_path"] for p in batch)
+        self.assertEqual(selected,assets)
+
+    def test_one_item_budget_still_rotates_without_feedback(self):
+        assets={x["path"] for x in REGISTRY["prompt_assets"] if x["status"]!="deprecated"}
+        selected=set()
+        for slot in range(len(assets)*2):
+            batch=plan_probes(REGISTRY,[],slot=slot,max_items=1)
+            self.assertEqual(len(batch),1)
+            selected.add(batch[0]["prompt_path"])
+        self.assertEqual(selected,assets)
+
+    def test_same_slot_is_deterministic_and_never_claims_real_run(self):
+        x=run_report(ROOT,REGISTRY,[],slot=23)
+        y=run_report(ROOT,REGISTRY,[],slot=23)
+        self.assertEqual(x["probe_plan"],y["probe_plan"])
+        self.assertEqual(x["feedback"]["reported_real_events"],0)
+        self.assertTrue(all(i["status"]=="PLANNED_NOT_RUN" for i in x["probe_plan"]))
+
+    def test_invalid_changed_paths_or_budget_rejected(self):
+        with self.assertRaises(ValueError):
+            plan_probes(REGISTRY,[],slot=0,max_items=3)
+        with self.assertRaises(ValueError):
+            plan_probes(REGISTRY,[],slot=0,changed_paths=["prompts/missing.md"])
+        with self.assertRaises(ValueError):
+            plan_probes(REGISTRY,[],slot=-1)
+
     def test_registry_complete_and_hash_frozen(self):
         audit=audit_registry(ROOT,REGISTRY)
         self.assertEqual(audit["status"],"PASS",audit["errors"])
