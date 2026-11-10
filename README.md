@@ -118,7 +118,7 @@ skills/
 
 | 项目 | 能力 | 路径 |
 |---|---|---|
-| [MetaLoop MVP 与能力反馈闭环](systems/metaloop/README.md) | 完整 Prompt Registry、真实反馈记录、重复缺陷发现、复用候选、退役审查、保守升级及回滚；不假称模型效果证明 | `systems/metaloop/` |
+| [MetaLoop MVP 与能力反馈闭环](systems/metaloop/README.md) | 全库 Registry/SHA 轻量核查、按小时限额轮巡、真实反馈记录、重复缺陷发现、复用候选、保守升级及回滚；轮巡计划不等于模型实测 | `systems/metaloop/` |
 
 ## Skills
 
