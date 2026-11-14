@@ -1,0 +1,63 @@
+{
+  "commit": "937f3be2f3638eb7096d788fdf32ac54652b9d95",
+  "run_id": 43566071711,
+  "job_id": 132360096609,
+  "url": "https://github.com/lovemoganna/AgentComponent/actions/runs/43566071711",
+  "job_conclusion": "success",
+  "python": "3.12.16",
+  "regression_tests": 51,
+  "scope": "External hosted code regression, not independent model-quality review",
+  "steps": [
+    {
+      "name": "Set up job",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/checkout@v4",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/setup-python@v5",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Deterministic regression",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Compare candidate and stable",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Audit complete prompt registry and frozen blob SHA",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Discover observations with explicit empty evidence",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Run actions/setup-python@v5",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Run actions/checkout@v4",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Complete job",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "log_provenance": "Exact contiguous unittest command/output segment from GitHub job logs; setup/auth/unrelated sections omitted."
+}

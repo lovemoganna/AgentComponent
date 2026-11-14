@@ -1,6 +1,8 @@
 {
-  "REPORT.md": "dc32fae8d87000cf02c619157d5fdda118ce84f49ee3ff10d1525d52e589bfa8",
+  "REPORT.md": "cc3ce7dd17b2a9d9e0ec33d134d3f130e4ff6264a2190c661ca8b0eab650e365",
   "approval-block.json": "8f8396dab2bd9451d89b65bf76b4f47c1e90cf734e03ec4053a52b6325a4a1f4",
+  "ci/regression.log": "b0e62a8626bab32bbe5f3cdfd33d93cb679c5a8dad958b38e8c38256702a95cf",
+  "ci/result.json": "4812087fecf1f5ad874a09f04d69057e906bb62b35bffec9f9d1df9c421be6e5",
   "preflight/stderr.txt": "8c68a8ad8fdb8bda3ffc50379c9af7f4ff21da7e0c8dfa32764bc69948b3a252",
   "preflight/stderr2.txt": "ac45fa2da13b377015236d8241d591493c6df7085a78a3844b8d2d87b8946d9c",
   "preflight/stderr4.txt": "f4c921dfd8226054faab05929e350446cbd0a939c8ac1e38e327f5196b871dd4",
