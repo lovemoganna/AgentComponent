@@ -1,0 +1,118 @@
+diff --git a/systems/metaloop/README.md b/systems/metaloop/README.md
+index 5276d7b..4bc0e4d 100644
+--- a/systems/metaloop/README.md
++++ b/systems/metaloop/README.md
+@@ -35,6 +35,8 @@
+ 
+ **限制**：文件字段仅是人工批准的程序化凭据，脚本不能验证审核人真实身份、原始证据真实性，也不能证明真实 LLM 提示质量。任何人都可以伪造 JSON 字段，因此独立人工验收必须在脚本外核实，自动化任务不得自行生成批准记录。没有可核对的证据则 NOOP。
+ 
++实验分支的内容排重门禁还会对每例的 `input + route + effective steps` 计算规范化指纹，拒绝与开发集重叠及 held-out 内部重复。改 ID、领域标签、键顺序、预期答案或预算不能让相同输入成为新题。该门禁只检查结构性重复，不能证明语义新颖性、开发集完整性或独立封存；这些仍须独立核验。
++
+ ## 下一轮高价值改进
+ 用真实但尚未参与开发的仓库 Prompt 任务建立跨域 held-out 集；保存模型、上下文与产物哈希，进行隔离 A/B。之后才决定是否增加真正并发、硬超时或外部工具适配器。不要因一轮失败修改所有 Prompt。
+ 
+diff --git a/systems/metaloop/engine.py b/systems/metaloop/engine.py
+index b64cc92..f2f4ca7 100644
+--- a/systems/metaloop/engine.py
++++ b/systems/metaloop/engine.py
+@@ -105,6 +105,18 @@ def compare(suite, baseline, candidate):
+                 candidate_pass=sum(r['candidate']=='PASS' for r in rows),
+                 cases=rows, independent_model_judge=False)
+ 
++def case_fingerprint(case):
++    """Identify the exercised input/workflow, not its ID or expected answer.
++
++    Changing metadata, answer, budgets or repair candidates cannot make an
++    exposed input unseen. Exact structural matching is not semantic novelty.
++    """
++    identity = dict(input=case['input'], route=case.get('route', 'direct'),
++                    steps=case.get('steps', [case.get('operation')]))
++    raw = json.dumps(identity, sort_keys=True, ensure_ascii=False,
++                     separators=(',', ':'), allow_nan=False).encode('utf-8')
++    return hashlib.sha256(raw).hexdigest()
++
+ def promotion(registry, suite, review=None):
+     """Gate an in-sample deterministic gain on separate heldout replay and human signoff.
+ 
+@@ -131,9 +143,16 @@ def promotion(registry, suite, review=None):
+     digest = hashlib.sha256(json.dumps(suite, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+     heldout_digest = hashlib.sha256(json.dumps(heldout, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+     original_ids = {x['id'] for x in suite['cases']}
+-    if heldout_digest == digest or original_ids.intersection(x['id'] for x in heldout.get('cases', [])):
++    development_fingerprints = {case_fingerprint(x) for x in suite['cases']}
++    heldout_fingerprints = [case_fingerprint(x) for x in heldout.get('cases', [])]
++    if (heldout_digest == digest
++            or original_ids.intersection(x['id'] for x in heldout.get('cases', []))
++            or development_fingerprints.intersection(heldout_fingerprints)):
+         return dict(promoted=False, reason='heldout overlaps development cases',
+                     report=report, registry=state)
++    if len(set(heldout_fingerprints)) != len(heldout_fingerprints):
++        return dict(promoted=False, reason='duplicate heldout task inputs',
++                    report=report, registry=state)
+     heldout_report = compare(heldout, stable, candidate)
+     if not heldout_report['promotable']:
+         return dict(promoted=False, reason='no heldout gain or regression',
+diff --git a/systems/metaloop/tests/test_engine.py b/systems/metaloop/tests/test_engine.py
+index 8663cf9..74dc483 100644
+--- a/systems/metaloop/tests/test_engine.py
++++ b/systems/metaloop/tests/test_engine.py
+@@ -1,4 +1,5 @@
+ import json
++from copy import deepcopy
+ import sys
+ import unittest
+ from pathlib import Path
+@@ -52,6 +53,53 @@ class MetaLoopTests(unittest.TestCase):
+         r = dict(REGISTRY, text_normalization={'stable':'normalize_unicode','candidate':'normalize_unicode'})
+         self.assertFalse(promotion(r, SUITE)['promoted'])
+ 
++    def test_renamed_reordered_development_cases_rejected(self):
++        review = self.synthetic_review()
++        copied = deepcopy(SUITE)
++        copied['cases'].reverse()
++        for case in copied['cases']:
++            case['id'] = 'renamed-' + case['id']
++            case['domain'] = 'metadata-' + case['domain']
++        review['heldout_suite'] = copied
++        before = deepcopy(REGISTRY)
++        result = promotion(REGISTRY, SUITE, review)
++        self.assertFalse(result['promoted'])
++        self.assertEqual(result['reason'], 'heldout overlaps development cases')
++        self.assertEqual(REGISTRY, before)
++
++    def test_partial_overlap_with_changed_answer_rejected(self):
++        review = self.synthetic_review()
++        case = deepcopy(SUITE['cases'][0])
++        case.update(id='new-id', expected='changed-answer', max_calls=19)
++        review['heldout_suite']['cases'].append(case)
++        result = promotion(REGISTRY, SUITE, review)
++        self.assertFalse(result['promoted'])
++        self.assertEqual(result['reason'], 'heldout overlaps development cases')
++
++    def test_dictionary_order_does_not_hide_overlap(self):
++        review = self.synthetic_review()
++        case = deepcopy(next(x for x in SUITE['cases'] if x['operation']=='percentage_drop'))
++        case['id'] = 'reordered-object'
++        case['input'] = dict(reversed(list(case['input'].items())))
++        review['heldout_suite']['cases'].append(case)
++        self.assertFalse(promotion(REGISTRY, SUITE, review)['promoted'])
++
++    def test_explicit_default_steps_do_not_hide_overlap(self):
++        review = self.synthetic_review()
++        case = deepcopy(SUITE['cases'][0])
++        case.update(id='explicit-default', route='direct', steps=[case['operation']])
++        review['heldout_suite']['cases'].append(case)
++        self.assertFalse(promotion(REGISTRY, SUITE, review)['promoted'])
++
++    def test_duplicate_heldout_inputs_rejected(self):
++        review = self.synthetic_review()
++        duplicate = deepcopy(review['heldout_suite']['cases'][0])
++        duplicate['id'] = 'different-id-same-task'
++        review['heldout_suite']['cases'].append(duplicate)
++        result = promotion(REGISTRY, SUITE, review)
++        self.assertFalse(result['promoted'])
++        self.assertEqual(result['reason'], 'duplicate heldout task inputs')
++
+     def test_regression_rejected(self):
+         self.assertFalse(compare(SUITE, 'normalize_unicode', 'normalize_ascii')['promotable'])
+ 

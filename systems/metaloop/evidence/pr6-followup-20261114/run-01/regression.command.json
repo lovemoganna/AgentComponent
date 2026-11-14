@@ -1,0 +1,14 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-I",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "systems/metaloop/tests",
+    "-v"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.12074963700001717
+}

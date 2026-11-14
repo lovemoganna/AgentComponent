@@ -1,0 +1,21 @@
+{
+  "seed": 20261114,
+  "order": [
+    [
+      "stable",
+      "nontechnical-pilot-decision"
+    ],
+    [
+      "candidate",
+      "technical-interval-coverage"
+    ],
+    [
+      "candidate",
+      "nontechnical-pilot-decision"
+    ],
+    [
+      "stable",
+      "technical-interval-coverage"
+    ]
+  ]
+}

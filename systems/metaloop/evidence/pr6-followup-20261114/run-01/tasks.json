@@ -1,0 +1,28 @@
+{
+  "technical-interval-coverage": {
+    "domain": "technical",
+    "source": "new synthetic self-contained task; not independently sealed held-out",
+    "input": "Write Python 3 stdlib function total_covered(intervals, start, end). start/end must be non-bool integers and end > start; otherwise raise ValueError. Each interval must be a list or tuple of exactly two non-bool integers a,b with a < b; reject invalid intervals by their zero-based index. Clip valid intervals to half-open [start,end), ignore valid outside intervals without rejecting them, and return {\"covered\": union length as integer, \"rejected\": indices in input order}. Do not double-count overlaps; do not mutate inputs. Provide runnable unit tests. Return only JSON with string fields code, tests, summary. The tests may import solution. No network or third-party packages. You have a single response; do not use tools or claim execution.",
+    "acceptance": [
+      "correct union, clipping and invalid indices",
+      "empty/overlap/touching/outside cases",
+      "bool/float/reversed/short records rejected",
+      "invalid window raises ValueError",
+      "input unchanged",
+      "stdlib only; code externally executable"
+    ]
+  },
+  "nontechnical-pilot-decision": {
+    "domain": "nontechnical",
+    "source": "synthetic facts, not a real organization or external report",
+    "input": "根据以下虚构试点记录，给主管写一段不超过220个Unicode字符的建议。事实：工具组20单，平均耗时从40分钟降到25分钟；自愿参加，且本轮只选简单单。同期对照组20单，从40分钟降到38分钟，处理复杂单。工具费每月900元。尚未测错误率、返工、长期效果，也未随机分组。要求：给出现在是否全面上线的建议、说明为何不能直接认定工具造成15分钟提效、提出下一步可验证试验，同时不把虚构记录包装成真实资料，不编造收益或审核。只能返回JSON，字段answer为完整建议。禁止工具调用。",
+    "acceptance": [
+      "<=220 Unicode code points",
+      "no immediate full rollout / bounded pilot",
+      "selection and complexity differences prevent causal attribution",
+      "matched or randomized next trial",
+      "quality/error/rework measures required",
+      "no fabricated savings or genuine independent signoff"
+    ]
+  }
+}

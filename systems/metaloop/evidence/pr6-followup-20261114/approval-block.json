@@ -1,0 +1,11 @@
+{
+  "status": "BLOCKED_AUTO_REVIEW",
+  "operation": "Start isolated Codex model evaluation with frozen repository prompts and synthetic task payloads",
+  "destination": "ab.chatgpt.com",
+  "stated_reason": "The user authorized A/B testing but did not explicitly authorize exporting this payload to that destination.",
+  "source": "Tool auto-review rejection during follow-up runner execution",
+  "workaround_attempted_after_rejection": false,
+  "successful_task_model_outputs": 0,
+  "approval_required": "Explicit user authorization to send the frozen public repository prompts and synthetic test inputs to ab.chatgpt.com for isolated A/B evaluation",
+  "independent_model_review": "NOT_VERIFIED"
+}

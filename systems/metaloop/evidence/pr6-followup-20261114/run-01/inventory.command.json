@@ -1,0 +1,11 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-I",
+    "systems/metaloop/lifecycle.py",
+    "audit",
+    "--strict"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.03497753500005274
+}

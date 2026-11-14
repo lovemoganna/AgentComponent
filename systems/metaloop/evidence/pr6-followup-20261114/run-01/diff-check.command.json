@@ -1,0 +1,9 @@
+{
+  "command": [
+    "git",
+    "diff",
+    "--check"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.002464193000037085
+}

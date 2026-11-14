@@ -105,6 +105,18 @@ def compare(suite, baseline, candidate):
                 candidate_pass=sum(r['candidate']=='PASS' for r in rows),
                 cases=rows, independent_model_judge=False)
 
+def case_fingerprint(case):
+    """Identify the exercised input/workflow, not its ID or expected answer.
+
+    Changing metadata, answer, budgets or repair candidates cannot make an
+    exposed input unseen. Exact structural matching is not semantic novelty.
+    """
+    identity = dict(input=case['input'], route=case.get('route', 'direct'),
+                    steps=case.get('steps', [case.get('operation')]))
+    raw = json.dumps(identity, sort_keys=True, ensure_ascii=False,
+                     separators=(',', ':'), allow_nan=False).encode('utf-8')
+    return hashlib.sha256(raw).hexdigest()
+
 def promotion(registry, suite, review=None):
     """Gate an in-sample deterministic gain on separate heldout replay and human signoff.
 
@@ -131,8 +143,15 @@ def promotion(registry, suite, review=None):
     digest = hashlib.sha256(json.dumps(suite, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
     heldout_digest = hashlib.sha256(json.dumps(heldout, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
     original_ids = {x['id'] for x in suite['cases']}
-    if heldout_digest == digest or original_ids.intersection(x['id'] for x in heldout.get('cases', [])):
+    development_fingerprints = {case_fingerprint(x) for x in suite['cases']}
+    heldout_fingerprints = [case_fingerprint(x) for x in heldout.get('cases', [])]
+    if (heldout_digest == digest
+            or original_ids.intersection(x['id'] for x in heldout.get('cases', []))
+            or development_fingerprints.intersection(heldout_fingerprints)):
         return dict(promoted=False, reason='heldout overlaps development cases',
+                    report=report, registry=state)
+    if len(set(heldout_fingerprints)) != len(heldout_fingerprints):
+        return dict(promoted=False, reason='duplicate heldout task inputs',
                     report=report, registry=state)
     heldout_report = compare(heldout, stable, candidate)
     if not heldout_report['promotable']:

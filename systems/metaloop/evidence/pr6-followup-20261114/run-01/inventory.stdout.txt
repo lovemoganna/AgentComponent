@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "prompt_files": 14,
+  "registered": 14,
+  "by_status": {
+    "candidate": 1,
+    "catalogued": 12,
+    "deprecated": 0,
+    "stable": 1
+  },
+  "errors": [],
+  "exact_duplicate_groups": []
+}

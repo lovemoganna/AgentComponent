@@ -1,0 +1,56 @@
+test_bounded_repair (test_engine.MetaLoopTests.test_bounded_repair) ... ok
+test_cross_domain_comparison (test_engine.MetaLoopTests.test_cross_domain_comparison) ... ok
+test_dictionary_order_does_not_hide_overlap (test_engine.MetaLoopTests.test_dictionary_order_does_not_hide_overlap) ... ok
+test_duplicate_heldout_inputs_rejected (test_engine.MetaLoopTests.test_duplicate_heldout_inputs_rejected) ... ok
+test_explicit_default_steps_do_not_hide_overlap (test_engine.MetaLoopTests.test_explicit_default_steps_do_not_hide_overlap) ... ok
+test_injected_instruction_is_data (test_engine.MetaLoopTests.test_injected_instruction_is_data) ... ok
+test_input_unchanged (test_engine.MetaLoopTests.test_input_unchanged) ... ok
+test_malformed_suite_rejected (test_engine.MetaLoopTests.test_malformed_suite_rejected) ... ok
+test_no_gain_rejected (test_engine.MetaLoopTests.test_no_gain_rejected) ... ok
+test_partial_overlap_with_changed_answer_rejected (test_engine.MetaLoopTests.test_partial_overlap_with_changed_answer_rejected) ... ok
+test_promotion_and_rollback (test_engine.MetaLoopTests.test_promotion_and_rollback) ... ok
+test_regression_rejected (test_engine.MetaLoopTests.test_regression_rejected) ... ok
+test_renamed_reordered_development_cases_rejected (test_engine.MetaLoopTests.test_renamed_reordered_development_cases_rejected) ... ok
+test_same_suite_cannot_count_as_independent_review (test_engine.MetaLoopTests.test_same_suite_cannot_count_as_independent_review) ... ok
+test_sequence_and_parallel_fanout (test_engine.MetaLoopTests.test_sequence_and_parallel_fanout) ... ok
+test_unknown_tool_refused (test_engine.MetaLoopTests.test_unknown_tool_refused) ... ok
+test_unverified_not_pass (test_engine.MetaLoopTests.test_unverified_not_pass) ... ok
+test_l1_direct_technical_formula (test_layer_evaluation.LayerByLayerTests.test_l1_direct_technical_formula) ... ok
+test_l1_failed_acceptance_budget_stops (test_layer_evaluation.LayerByLayerTests.test_l1_failed_acceptance_budget_stops) ... ok
+test_l1_no_external_code_execution (test_layer_evaluation.LayerByLayerTests.test_l1_no_external_code_execution) ... ok
+test_l1_parallel_fanout_is_not_concurrent (test_layer_evaluation.LayerByLayerTests.test_l1_parallel_fanout_is_not_concurrent) ... ok
+test_l1_sequence_dependency (test_layer_evaluation.LayerByLayerTests.test_l1_sequence_dependency) ... ok
+test_l2_cross_domain_multistep_comparison (test_layer_evaluation.LayerByLayerTests.test_l2_cross_domain_multistep_comparison) ... ok
+test_l2_regression_blocks_promotion (test_layer_evaluation.LayerByLayerTests.test_l2_regression_blocks_promotion) ... ok
+test_l3_no_production_upgrade_without_independent_evidence (test_layer_evaluation.LayerByLayerTests.test_l3_no_production_upgrade_without_independent_evidence) ... ok
+test_l3_rollback_without_history_errors (test_layer_evaluation.LayerByLayerTests.test_l3_rollback_without_history_errors) ... ok
+test_l3_unchanged_candidate_is_noop (test_layer_evaluation.LayerByLayerTests.test_l3_unchanged_candidate_is_noop) ... ok
+test_changed_priority_cannot_starve_other_assets (test_lifecycle.LifecycleTests.test_changed_priority_cannot_starve_other_assets) ... ok
+test_hash_tamper_detected (test_lifecycle.LifecycleTests.test_hash_tamper_detected) ... ok
+test_hourly_rotation_covers_all_registry_assets_without_feedback (test_lifecycle.LifecycleTests.test_hourly_rotation_covers_all_registry_assets_without_feedback) ... ok
+test_invalid_changed_paths_or_budget_rejected (test_lifecycle.LifecycleTests.test_invalid_changed_paths_or_budget_rejected) ... ok
+test_low_value_review_not_delete (test_lifecycle.LifecycleTests.test_low_value_review_not_delete) ... ok
+test_missing_registry_detected (test_lifecycle.LifecycleTests.test_missing_registry_detected) ... ok
+test_new_missing_capability_candidate (test_lifecycle.LifecycleTests.test_new_missing_capability_candidate) ... ok
+test_no_observations_means_no_claims (test_lifecycle.LifecycleTests.test_no_observations_means_no_claims) ... ok
+test_one_item_budget_still_rotates_without_feedback (test_lifecycle.LifecycleTests.test_one_item_budget_still_rotates_without_feedback) ... ok
+test_probes_cover_technical_and_nontechnical (test_lifecycle.LifecycleTests.test_probes_cover_technical_and_nontechnical) ... ok
+test_probes_shift_to_less_observed_asset (test_lifecycle.LifecycleTests.test_probes_shift_to_less_observed_asset) ... ok
+test_record_duplication_detection (test_lifecycle.LifecycleTests.test_record_duplication_detection) ... ok
+test_registry_complete_and_hash_frozen (test_lifecycle.LifecycleTests.test_registry_complete_and_hash_frozen) ... ok
+test_reject_raw_user_content (test_lifecycle.LifecycleTests.test_reject_raw_user_content) ... ok
+test_reject_unaware_timestamp (test_lifecycle.LifecycleTests.test_reject_unaware_timestamp) ... ok
+test_reject_unknown_asset (test_lifecycle.LifecycleTests.test_reject_unknown_asset) ... ok
+test_repeated_real_failure_becomes_candidate (test_lifecycle.LifecycleTests.test_repeated_real_failure_becomes_candidate) ... ok
+test_retirement_counts_distinct_failed_tasks (test_lifecycle.LifecycleTests.test_retirement_counts_distinct_failed_tasks) ... ok
+test_retirement_does_not_depend_on_event_order (test_lifecycle.LifecycleTests.test_retirement_does_not_depend_on_event_order) ... ok
+test_same_slot_is_deterministic_and_never_claims_real_run (test_lifecycle.LifecycleTests.test_same_slot_is_deterministic_and_never_claims_real_run) ... ok
+test_sha_verifies_git_blob (test_lifecycle.LifecycleTests.test_sha_verifies_git_blob) ... ok
+test_single_task_duplicates_do_not_trigger (test_lifecycle.LifecycleTests.test_single_task_duplicates_do_not_trigger) ... ok
+test_synthetic_events_excluded (test_lifecycle.LifecycleTests.test_synthetic_events_excluded) ... ok
+test_transfer_candidates_require_two_domains (test_lifecycle.LifecycleTests.test_transfer_candidates_require_two_domains) ... ok
+
+----------------------------------------------------------------------
+Ran 51 tests in 0.015s
+
+OK

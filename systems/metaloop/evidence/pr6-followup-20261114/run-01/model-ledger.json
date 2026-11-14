@@ -1,0 +1,42 @@
+[
+  {
+    "task": "nontechnical-pilot-decision",
+    "label": "stable",
+    "exit_code": "NOT_RUN",
+    "status": "NOT_VERIFIED",
+    "raw_output": null,
+    "failure": "BLOCKED_AUTO_REVIEW: payload export to ab.chatgpt.com not explicitly authorized",
+    "independent_review": "NOT_VERIFIED",
+    "decision": "DO_NOT_PROMOTE"
+  },
+  {
+    "task": "technical-interval-coverage",
+    "label": "candidate",
+    "exit_code": "NOT_RUN",
+    "status": "NOT_VERIFIED",
+    "raw_output": null,
+    "failure": "BLOCKED_AUTO_REVIEW: payload export to ab.chatgpt.com not explicitly authorized",
+    "independent_review": "NOT_VERIFIED",
+    "decision": "DO_NOT_PROMOTE"
+  },
+  {
+    "task": "nontechnical-pilot-decision",
+    "label": "candidate",
+    "exit_code": "NOT_RUN",
+    "status": "NOT_VERIFIED",
+    "raw_output": null,
+    "failure": "BLOCKED_AUTO_REVIEW: payload export to ab.chatgpt.com not explicitly authorized",
+    "independent_review": "NOT_VERIFIED",
+    "decision": "DO_NOT_PROMOTE"
+  },
+  {
+    "task": "technical-interval-coverage",
+    "label": "stable",
+    "exit_code": "NOT_RUN",
+    "status": "NOT_VERIFIED",
+    "raw_output": null,
+    "failure": "BLOCKED_AUTO_REVIEW: payload export to ab.chatgpt.com not explicitly authorized",
+    "independent_review": "NOT_VERIFIED",
+    "decision": "DO_NOT_PROMOTE"
+  }
+]

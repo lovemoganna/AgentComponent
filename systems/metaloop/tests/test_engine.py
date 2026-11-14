@@ -1,4 +1,5 @@
 import json
+from copy import deepcopy
 import sys
 import unittest
 from pathlib import Path
@@ -51,6 +52,53 @@ class MetaLoopTests(unittest.TestCase):
     def test_no_gain_rejected(self):
         r = dict(REGISTRY, text_normalization={'stable':'normalize_unicode','candidate':'normalize_unicode'})
         self.assertFalse(promotion(r, SUITE)['promoted'])
+
+    def test_renamed_reordered_development_cases_rejected(self):
+        review = self.synthetic_review()
+        copied = deepcopy(SUITE)
+        copied['cases'].reverse()
+        for case in copied['cases']:
+            case['id'] = 'renamed-' + case['id']
+            case['domain'] = 'metadata-' + case['domain']
+        review['heldout_suite'] = copied
+        before = deepcopy(REGISTRY)
+        result = promotion(REGISTRY, SUITE, review)
+        self.assertFalse(result['promoted'])
+        self.assertEqual(result['reason'], 'heldout overlaps development cases')
+        self.assertEqual(REGISTRY, before)
+
+    def test_partial_overlap_with_changed_answer_rejected(self):
+        review = self.synthetic_review()
+        case = deepcopy(SUITE['cases'][0])
+        case.update(id='new-id', expected='changed-answer', max_calls=19)
+        review['heldout_suite']['cases'].append(case)
+        result = promotion(REGISTRY, SUITE, review)
+        self.assertFalse(result['promoted'])
+        self.assertEqual(result['reason'], 'heldout overlaps development cases')
+
+    def test_dictionary_order_does_not_hide_overlap(self):
+        review = self.synthetic_review()
+        case = deepcopy(next(x for x in SUITE['cases'] if x['operation']=='percentage_drop'))
+        case['id'] = 'reordered-object'
+        case['input'] = dict(reversed(list(case['input'].items())))
+        review['heldout_suite']['cases'].append(case)
+        self.assertFalse(promotion(REGISTRY, SUITE, review)['promoted'])
+
+    def test_explicit_default_steps_do_not_hide_overlap(self):
+        review = self.synthetic_review()
+        case = deepcopy(SUITE['cases'][0])
+        case.update(id='explicit-default', route='direct', steps=[case['operation']])
+        review['heldout_suite']['cases'].append(case)
+        self.assertFalse(promotion(REGISTRY, SUITE, review)['promoted'])
+
+    def test_duplicate_heldout_inputs_rejected(self):
+        review = self.synthetic_review()
+        duplicate = deepcopy(review['heldout_suite']['cases'][0])
+        duplicate['id'] = 'different-id-same-task'
+        review['heldout_suite']['cases'].append(duplicate)
+        result = promotion(REGISTRY, SUITE, review)
+        self.assertFalse(result['promoted'])
+        self.assertEqual(result['reason'], 'duplicate heldout task inputs')
 
     def test_regression_rejected(self):
         self.assertFalse(compare(SUITE, 'normalize_unicode', 'normalize_ascii')['promotable'])

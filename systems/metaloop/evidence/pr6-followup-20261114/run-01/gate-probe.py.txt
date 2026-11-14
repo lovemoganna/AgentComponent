@@ -1,0 +1,11 @@
+import copy,json,sys
+sys.path.insert(0,'systems/metaloop')
+from engine import promotion
+from pathlib import Path
+p=Path('systems/metaloop'); r=json.loads((p/'registry.json').read_text()); s=json.loads((p/'cases/regression.json').read_text()); h=copy.deepcopy(s)
+for c in h['cases']: c['id']='renamed-'+c['id']
+h['cases'].reverse()
+review=dict(approved=True,reviewer_type='human',reviewer_id='SYNTHETIC_TEST_NOT_APPROVAL',evidence_ref='fixture://synthetic',heldout_suite=h)
+x=promotion(r,s,review)
+assert json.loads((p/'registry.json').read_text())==r
+print(json.dumps(dict(promoted_in_memory=x['promoted'],reason=x.get('reason'),registry_unchanged=True,synthetic=True)))

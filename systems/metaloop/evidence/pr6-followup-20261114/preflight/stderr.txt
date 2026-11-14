@@ -1,0 +1,4 @@
+2026-11-14T06:16:57.121684Z  WARN codex_state::runtime: failed to open state db at /home/agent/.codex/state_5.sqlite: failed to open state DB at /home/agent/.codex/state_5.sqlite: error returned from database: (code: 14) unable to open database file
+2026-11-14T06:16:57.121869Z  WARN codex_rollout::state_db: failed to initialize state runtime: failed to initialize state runtime at /home/agent/.codex: failed to open state DB at /home/agent/.codex/state_5.sqlite: error returned from database: (code: 14) unable to open database file: error returned from database: (code: 14) unable to open database file: (code: 14) unable to open database file
+Reading additional input from stdin...
+Error: failed to initialize in-process app-server client: Read-only file system (os error 30)

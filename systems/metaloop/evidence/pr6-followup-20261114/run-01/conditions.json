@@ -1,0 +1,15 @@
+{
+  "collected_at": "2026-11-14T06:22:38.924209+00:00",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "cli_version": "codex-cli 0.167.0-alpha.4",
+  "model_id": "NOT_VERIFIED",
+  "sampling": "NOT_VERIFIED",
+  "independent_reviewer": "NOT_VERIFIED",
+  "human_approval": "NOT_VERIFIED",
+  "system_prompt_identity": "NOT_VERIFIED",
+  "intended_tools": "none; textual no-tools instruction with read-only sandbox, not a hard tool denial",
+  "scope": "Fresh CLI processes and temporary working directories, no previous conversation supplied. Shared host/auth runtime. Model context isolation requires successful startup.",
+  "resource_budget": "one response, 30 second wall timeout per attempt",
+  "model_token_usage": "NOT_VERIFIED",
+  "model_cost": "NOT_VERIFIED"
+}
