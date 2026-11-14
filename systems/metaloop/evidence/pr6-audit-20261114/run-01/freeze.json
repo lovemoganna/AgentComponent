@@ -1,0 +1,16 @@
+{
+  "base_commit": "011694de28436fc11cc1aa68ff916aa7579dff06",
+  "pr_head_commit": "13768da0d7e9655b481b1a01cd03754c6d24cfc9",
+  "assets": {
+    "stable": {
+      "path": "prompts/meta-prompt/execute/execute-evidence-based-loop.md",
+      "blob_sha": "188953441f5c54fdb81c7883ad05aa0e15a277fa",
+      "sha256": "fa310ffe6a97daa8c52e656e1e94d11a69abbfd5bfea629c23446dd5982780e8"
+    },
+    "candidate": {
+      "path": "prompts/meta-prompt/execute/orchestrate-metaloop.md",
+      "blob_sha": "e87076047facb3a88ad95a6322f06a4cd478b0cc",
+      "sha256": "630c029afcc4b24ffd9e2847d1cfd709a040db3be10b6d9681bae9a50c13669b"
+    }
+  }
+}

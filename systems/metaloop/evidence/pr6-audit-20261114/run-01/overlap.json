@@ -1,0 +1,50 @@
+{
+  "status": "OVERLAP_DETECTED_PUBLIC_PRIOR_EXPOSURE",
+  "hits": [
+    {
+      "path": "prompts/meta-prompt/execute/execute-evidence-based-loop.md",
+      "line": 18,
+      "text": "收到任务后，自主完成分析、执行、验证、修复、复测与交付。不要把生成结果、执行步骤或模型自评视为任务成功。"
+    },
+    {
+      "path": "prompts/meta-prompt/execute/orchestrate-metaloop.md",
+      "line": 13,
+      "text": "把任意领域任务转化为可执行、可验证的工作流；根据真实运行经验改进方法，但不能用自评或改测试答案制造进步。"
+    },
+    {
+      "path": "prompts/meta-prompt/execute/orchestrate-metaloop.md",
+      "line": 36,
+      "text": "4. 先用确定性检查核对结构、计算、状态；语义/事实需外部来源或独立评审，禁止用同一模型自评替代。"
+    },
+    {
+      "path": "systems/metaloop/evidence/nontechnical-reference-probe-20261114.md",
+      "line": 6,
+      "text": "Public source: https://www.nist.gov/programs-projects/building-evaluation-probes-agentic-ai"
+    },
+    {
+      "path": "systems/metaloop/evidence/paired-eval-preregistration-20261114.md",
+      "line": 13,
+      "text": "Input contract: Given a CSV with header `id,amount` and rows `a,2`, `b,3`, `c,` and `d,5,extra`, produce a Python 3.11 stdlib function returning the sum of valid integer amounts and a structured list of rejected rows. Reject missing values and extra columns; do not silently coerce invalid records. Include a runnable unit test. Expected valid sum: 5, with two rejected records (c, d). No external packages or network."
+    },
+    {
+      "path": "systems/metaloop/evidence/paired-eval-preregistration-20261114.md",
+      "line": 14,
+      "text": "Check: run actual code in a fresh environment; assert total, rejection reasons, empty input, quoted CSV and malformed row. Compare to official DictReader restkey/restval semantics. Do not count generated code as tested unless execution logs are saved."
+    },
+    {
+      "path": "systems/metaloop/evidence/paired-eval-preregistration-20261114.md",
+      "line": 17,
+      "text": "Reference: https://www.nist.gov/programs-projects/building-evaluation-probes-agentic-ai"
+    },
+    {
+      "path": "systems/metaloop/evidence/technical-reference-probe-20261114.md",
+      "line": 6,
+      "text": "Execution: current ChatGPT session generated a reference implementation using Python 3 stdlib `csv.DictReader(restkey=\"__extra__\", restval=None)` and ran six Python `unittest` assertions in the available Python execution environment. Model output was not generated in two separately isolated stable/candidate prompt conditions; do not attribute this result to either prompt."
+    }
+  ],
+  "history": "13768da0d7e9655b481b1a01cd03754c6d24cfc9 docs(metaloop): record actual nontechnical reference probe with explicit no-AB limitation\neb438bbaffeb8fa245f8d8f1aa97f6cb30d0a9cd test(metaloop): record executed CSV reference checks without claiming model A/B\n51d22e84415c0fcd8faeeaef05268b0a6b81466b docs(metaloop): preregister cross-domain paired evaluation without claiming runs\n",
+  "development_suite": "systems/metaloop/cases/regression.json",
+  "complete_development_inventory": "NOT_VERIFIED",
+  "independent_sealing": "NOT_VERIFIED",
+  "interpretation": "A/B preregistration and prior reference probes already expose tasks/answers. Not blind held-out. No claim of exact match to every private development case."
+}

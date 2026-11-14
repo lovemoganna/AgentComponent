@@ -1,0 +1,25 @@
+{
+  "collected_at": "2026-11-14T04:43:12.427314+00:00",
+  "runtime": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "python311": "NOT_VERIFIED",
+  "controller": "Current ChatGPT session; exact deployed model identifier NOT_VERIFIED",
+  "model_runs": 0,
+  "model_id": "NOT_VERIFIED",
+  "model_temperature": "NOT_VERIFIED",
+  "tokens": "NOT_VERIFIED",
+  "cost": "NOT_VERIFIED",
+  "model_latency": "NOT_VERIFIED",
+  "isolation": "Separate temporary directories/processes; sanitized env; Python -I; shared OS/kernel; no OS network isolation",
+  "clean_model_context": "NOT_VERIFIED",
+  "independent_reviewer": "NOT_VERIFIED",
+  "tools": [
+    "git",
+    "Python stdlib",
+    "exec_command",
+    "GitHub connector",
+    "web retrieval"
+  ],
+  "external_model_api_used": false
+}

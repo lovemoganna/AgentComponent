@@ -1,0 +1,102 @@
+[
+  {
+    "label": "stable",
+    "control": "regression",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "-I",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "systems/metaloop/tests",
+      "-v"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.13677539700000807,
+    "attribution": "Repository deterministic control; prompt was NOT supplied to a model"
+  },
+  {
+    "label": "stable",
+    "control": "adapter-compare",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "-I",
+      "systems/metaloop/engine.py",
+      "compare"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.057045237000011184,
+    "attribution": "Repository deterministic control; prompt was NOT supplied to a model"
+  },
+  {
+    "label": "stable",
+    "control": "inventory",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "-I",
+      "systems/metaloop/lifecycle.py",
+      "audit",
+      "--strict"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.050378213000044525,
+    "attribution": "Repository deterministic control; prompt was NOT supplied to a model"
+  },
+  {
+    "label": "stable",
+    "control": "overlap-gate",
+    "exit_code": 0,
+    "synthetic": true
+  },
+  {
+    "label": "candidate",
+    "control": "regression",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "-I",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "systems/metaloop/tests",
+      "-v"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.13613533400001643,
+    "attribution": "Repository deterministic control; prompt was NOT supplied to a model"
+  },
+  {
+    "label": "candidate",
+    "control": "adapter-compare",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "-I",
+      "systems/metaloop/engine.py",
+      "compare"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.03934562299997424,
+    "attribution": "Repository deterministic control; prompt was NOT supplied to a model"
+  },
+  {
+    "label": "candidate",
+    "control": "inventory",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "-I",
+      "systems/metaloop/lifecycle.py",
+      "audit",
+      "--strict"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.038921997999977975,
+    "attribution": "Repository deterministic control; prompt was NOT supplied to a model"
+  },
+  {
+    "label": "candidate",
+    "control": "overlap-gate",
+    "exit_code": 0,
+    "synthetic": true
+  }
+]

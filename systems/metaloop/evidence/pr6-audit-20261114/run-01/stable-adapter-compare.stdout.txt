@@ -1,0 +1,56 @@
+{
+  "promotable": true,
+  "baseline_pass": 5,
+  "candidate_pass": 6,
+  "cases": [
+    {
+      "id": "text_unicode_nbsp",
+      "domain": "nontechnical-writing",
+      "baseline": "FAIL",
+      "candidate": "PASS",
+      "baseline_output": "事实 优先",
+      "candidate_output": "事实 优先"
+    },
+    {
+      "id": "text_ascii_regression",
+      "domain": "nontechnical-writing",
+      "baseline": "PASS",
+      "candidate": "PASS",
+      "baseline_output": "表达 清楚",
+      "candidate_output": "表达 清楚"
+    },
+    {
+      "id": "text_identity_regression",
+      "domain": "nontechnical-writing",
+      "baseline": "PASS",
+      "candidate": "PASS",
+      "baseline_output": "如实陈述",
+      "candidate_output": "如实陈述"
+    },
+    {
+      "id": "numeric_technical",
+      "domain": "technical-analysis",
+      "baseline": "PASS",
+      "candidate": "PASS",
+      "baseline_output": 10.0492,
+      "candidate_output": 10.0492
+    },
+    {
+      "id": "json_technical",
+      "domain": "technical-analysis",
+      "baseline": "PASS",
+      "candidate": "PASS",
+      "baseline_output": true,
+      "candidate_output": true
+    },
+    {
+      "id": "dedupe_nontechnical",
+      "domain": "nontechnical-writing",
+      "baseline": "PASS",
+      "candidate": "PASS",
+      "baseline_output": "观察\n推断",
+      "candidate_output": "观察\n推断"
+    }
+  ],
+  "independent_model_judge": false
+}

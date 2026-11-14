@@ -1,0 +1,24 @@
+[
+  {
+    "task": "A-technical-CSV",
+    "stable_raw_output": null,
+    "candidate_raw_output": null,
+    "stable_status": "NOT_VERIFIED",
+    "candidate_status": "NOT_VERIFIED",
+    "reason": "No isolated model invocations performed; reference probe is not attributable to either prompt",
+    "independent_verification": "NOT_VERIFIED",
+    "paired_result": "NOT_COMPARABLE",
+    "promotion": "BLOCKED"
+  },
+  {
+    "task": "B-nontechnical-source-explanation",
+    "stable_raw_output": null,
+    "candidate_raw_output": null,
+    "stable_status": "NOT_VERIFIED",
+    "candidate_status": "NOT_VERIFIED",
+    "reason": "No isolated model invocations performed; reference probe is not attributable to either prompt",
+    "independent_verification": "NOT_VERIFIED",
+    "paired_result": "NOT_COMPARABLE",
+    "promotion": "BLOCKED"
+  }
+]

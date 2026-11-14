@@ -1,0 +1,19 @@
+{
+  "status": "EXTERNAL_REFERENCE_OPENED_NOT_INDEPENDENT_REVIEW",
+  "audit_date": "2026-11-14",
+  "complete_archival_snapshot": "NOT_VERIFIED",
+  "sources": [
+    {
+      "url": "https://docs.python.org/3.11/library/csv.html",
+      "locator": "DictReader and Dialect.strict",
+      "supported_basis": "Extra columns are collected under restkey; missing columns use restval. Strict mode raises csv.Error for bad input.",
+      "limits": "No Stable or Candidate generated CSV code has been executed. Python 3.11 runtime not available in the recorded run."
+    },
+    {
+      "url": "https://www.nist.gov/programs-projects/building-evaluation-probes-agentic-ai",
+      "locator": "Description, Objectives and Approach",
+      "supported_basis": "Reference-corpus probes and audit trails support claim-grounding assessment using faithfulness, completeness and sufficiency criteria.",
+      "limits": "Not an independent review or measured accuracy result for this repository. No automated probe establishes reviewer identity."
+    }
+  ]
+}

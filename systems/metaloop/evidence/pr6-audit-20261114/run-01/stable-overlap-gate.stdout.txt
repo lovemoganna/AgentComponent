@@ -1,0 +1,8 @@
+{
+  "probe": "renamed development cases",
+  "synthetic": true,
+  "inputs_and_answers_identical": true,
+  "promoted_in_memory": true,
+  "disk_registry_unchanged": true,
+  "reason": null
+}
