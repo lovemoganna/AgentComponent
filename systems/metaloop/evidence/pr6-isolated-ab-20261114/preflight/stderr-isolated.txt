@@ -1,0 +1,3 @@
+Reading additional input from stdin...
+2026-11-14T06:36:25.377983Z ERROR codex_core::session: Failed to create session: failed to load AGENTS.md instructions for environment `local`: fs sandbox helper failed with status exit status: 1: bwrap: loopback: Failed to create NETLINK_ROUTE socket: Operation not permitted
+Error: thread/start: thread/start failed: error creating thread: failed to load AGENTS.md instructions for environment `local`: fs sandbox helper failed with status exit status: 1: bwrap: loopback: Failed to create NETLINK_ROUTE socket: Operation not permitted (code -32603)

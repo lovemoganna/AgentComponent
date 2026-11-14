@@ -1,0 +1,19 @@
+Reading additional input from stdin...
+2026-11-14T06:37:56.538220Z  WARN codex_network_proxy::proxy: allowUnixSockets and dangerouslyAllowAllUnixSockets are macOS-only; requests will be rejected on this platform
+OpenAI Codex v0.167.0-alpha.4
+--------
+workdir: /workspace/scratch/71ef9b60ffb2/model-preflight
+model: gpt-6.1-sol
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: none
+reasoning summaries: none
+session id: 01a1d8c6-e7ad-7cd0-908a-3e1427ef232a
+--------
+user
+Return READY only. Do not use tools.
+codex
+READY
+tokens used
+1,827

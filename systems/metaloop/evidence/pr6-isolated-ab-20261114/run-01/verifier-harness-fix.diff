@@ -1,0 +1,20 @@
+--- initial-frozen-verifier.py
++++ verified-verifier.py
+@@ -65,7 +65,7 @@
+     for n in ast.walk(tree):
+         if isinstance(n,(ast.Import,ast.ImportFrom)):
+             names=[x.name for x in n.names] if isinstance(n,ast.Import) else [n.module or '']
+-            if any(x.split('.')[0] not in ['typing','collections','copy','unittest','math','functools','itertools'] for x in names):return False
++            if any(x.split('.')[0] not in ['typing','collections','copy','unittest','math','functools','itertools','solution'] for x in names):return False
+         if isinstance(n,ast.Name) and n.id in ['open','eval','exec','compile','__import__','getattr','globals','locals','vars','input']:return False
+         if isinstance(n,ast.Attribute) and n.attr.startswith('__'):return False
+     return True
+@@ -93,7 +93,7 @@
+                         result['external_test_exit_code']=r.returncode
+                         if r.returncode==0:result['external_tests']=json.loads(r.stdout)
+                         # -I ignores PYTHONPATH; explicitly supply only the fresh temp dir.
+-                        cmd=[sys.executable,'-I','-c',"import sys,runpy;sys.path.insert(0,sys.argv[1]);runpy.run_path(sys.argv[2],run_name='__main__')",d,str(root/'worker_tests.py')]
++                        cmd=[sys.executable,'-I','-c',"import sys,runpy;root,path=sys.argv[1:];sys.path.insert(0,root);sys.argv=[path];runpy.run_path(path,run_name='__main__')",d,str(root/'worker_tests.py')]
+                         r=subprocess.run(cmd,capture_output=True,text=True,cwd=root,timeout=10)
+                         (out/(name+'.worker-tests.stdout.txt')).write_text(r.stdout)
+                         (out/(name+'.worker-tests.stderr.txt')).write_text(r.stderr)

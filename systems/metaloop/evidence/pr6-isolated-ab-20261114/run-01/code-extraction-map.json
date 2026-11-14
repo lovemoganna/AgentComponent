@@ -1,0 +1,58 @@
+[
+  {
+    "raw_output": "stable-technical-interval-coverage-r1.raw.txt",
+    "json_field": "code",
+    "extracted_file": "stable-technical-interval-coverage-r1.solution.py",
+    "sha256": "d23ada595c650bdfb3d191e05972f3a1ac344e7dd81da435562696f2227d7b26",
+    "byte_preserving_after_json_decode": true
+  },
+  {
+    "raw_output": "stable-technical-interval-coverage-r1.raw.txt",
+    "json_field": "tests",
+    "extracted_file": "stable-technical-interval-coverage-r1.worker-tests.py",
+    "sha256": "e08db67d5b5091368d541f494bf3a6376d184cbc6d8f8a2b7bbf28fccb022a4b",
+    "byte_preserving_after_json_decode": true
+  },
+  {
+    "raw_output": "candidate-technical-interval-coverage-r2.raw.txt",
+    "json_field": "code",
+    "extracted_file": "candidate-technical-interval-coverage-r2.solution.py",
+    "sha256": "b61a38c13b2e2dcdf085a00831488c8d8a1473b54fe631a71b6ccdeeddd0aa0b",
+    "byte_preserving_after_json_decode": true
+  },
+  {
+    "raw_output": "candidate-technical-interval-coverage-r2.raw.txt",
+    "json_field": "tests",
+    "extracted_file": "candidate-technical-interval-coverage-r2.worker-tests.py",
+    "sha256": "68113251e2b1166674d14458cb1a9cf469155594decca27056f242094801312d",
+    "byte_preserving_after_json_decode": true
+  },
+  {
+    "raw_output": "candidate-technical-interval-coverage-r1.raw.txt",
+    "json_field": "code",
+    "extracted_file": "candidate-technical-interval-coverage-r1.solution.py",
+    "sha256": "4f1546193c63baf9418a7294a4d8ddc03dc3fe478e8ad6e18e84e7c08b94f681",
+    "byte_preserving_after_json_decode": true
+  },
+  {
+    "raw_output": "candidate-technical-interval-coverage-r1.raw.txt",
+    "json_field": "tests",
+    "extracted_file": "candidate-technical-interval-coverage-r1.worker-tests.py",
+    "sha256": "e9e18d9b521d4fdc4c22c999e3f111658bca0e6333abd4e163a899fd3eb8f5b9",
+    "byte_preserving_after_json_decode": true
+  },
+  {
+    "raw_output": "stable-technical-interval-coverage-r2.raw.txt",
+    "json_field": "code",
+    "extracted_file": "stable-technical-interval-coverage-r2.solution.py",
+    "sha256": "3d728e28789fd7926eec9e43a164ad04b2d029a363a1a5993f08d43074f6c0ad",
+    "byte_preserving_after_json_decode": true
+  },
+  {
+    "raw_output": "stable-technical-interval-coverage-r2.raw.txt",
+    "json_field": "tests",
+    "extracted_file": "stable-technical-interval-coverage-r2.worker-tests.py",
+    "sha256": "4406a120181905dc029eae1c4a7296813d0bc9bd79bcc87acda08e6967b3f2eb",
+    "byte_preserving_after_json_decode": true
+  }
+]

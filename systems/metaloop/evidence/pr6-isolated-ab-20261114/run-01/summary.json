@@ -1,0 +1,77 @@
+{
+  "status": "PAIRED_PILOT_COMPLETE_NO_PROMOTION",
+  "worker_runs": 8,
+  "review_runs": 4,
+  "unique_threads": 12,
+  "pairs": 4,
+  "pair_verdicts": [
+    "TIE",
+    "TIE",
+    "TIE",
+    "TIE"
+  ],
+  "worker_tool_invocations": 0,
+  "prompt_blobs_unchanged": true,
+  "same_native_config_hash": true,
+  "model_alias": "gpt-6.1-sol",
+  "backend_snapshot": "NOT_VERIFIED",
+  "independent_context_review": true,
+  "different_model_review": "NOT_VERIFIED",
+  "human_review": "NOT_VERIFIED",
+  "blind_heldout": "NOT_VERIFIED",
+  "complete_development_nonoverlap": "NOT_VERIFIED",
+  "money_cost": "NOT_VERIFIED",
+  "decision": "KEEP_STABLE_KEEP_CANDIDATE_UNPROMOTED",
+  "by_version": {
+    "stable": {
+      "task_runs_passed": 4,
+      "input_tokens": 58219,
+      "cached_input_tokens": 45568,
+      "output_tokens": 3097,
+      "reasoning_output_tokens": 203,
+      "observed_total_wall_seconds": 104.15348870699995,
+      "domains": {
+        "nontechnical-pilot-decision": {
+          "runs": 2,
+          "deterministic_passed": 2,
+          "external_assertions_per_run": null,
+          "characters": [
+            162,
+            164
+          ]
+        },
+        "technical-interval-coverage": {
+          "runs": 2,
+          "deterministic_passed": 2,
+          "external_assertions_per_run": 115,
+          "characters": null
+        }
+      }
+    },
+    "candidate": {
+      "task_runs_passed": 4,
+      "input_tokens": 58131,
+      "cached_input_tokens": 45568,
+      "output_tokens": 2892,
+      "reasoning_output_tokens": 173,
+      "observed_total_wall_seconds": 94.29530544799991,
+      "domains": {
+        "nontechnical-pilot-decision": {
+          "runs": 2,
+          "deterministic_passed": 2,
+          "external_assertions_per_run": null,
+          "characters": [
+            150,
+            139
+          ]
+        },
+        "technical-interval-coverage": {
+          "runs": 2,
+          "deterministic_passed": 2,
+          "external_assertions_per_run": 115,
+          "characters": null
+        }
+      }
+    }
+  }
+}

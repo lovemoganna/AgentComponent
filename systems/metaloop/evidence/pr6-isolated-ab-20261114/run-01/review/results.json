@@ -1,0 +1,386 @@
+[
+  {
+    "review": "review-1",
+    "success": true,
+    "parsed": {
+      "responses": [
+        {
+          "id": "A",
+          "criteria": [
+            {
+              "criterion": "<=220 Unicode code points",
+              "pass": true,
+              "evidence": "answer全文未超过220个Unicode码点。"
+            },
+            {
+              "criterion": "no immediate full rollout / bounded pilot",
+              "pass": true,
+              "evidence": "明确建议“暂不全面上线”，并提出下一步分组试验。"
+            },
+            {
+              "criterion": "selection and complexity differences prevent causal attribution",
+              "pass": true,
+              "evidence": "指出“参与者自愿且只处理简单单”、对照组“处理复杂单”，并明确“不能直接把15分钟降幅归因于工具”。"
+            },
+            {
+              "criterion": "matched or randomized next trial",
+              "pass": true,
+              "evidence": "提出“按复杂度分层随机分组”。"
+            },
+            {
+              "criterion": "quality/error/rework measures required",
+              "pass": true,
+              "evidence": "要求“同期比较耗时、错误率和返工，延长观察”。"
+            },
+            {
+              "criterion": "no fabricated savings or genuine independent signoff",
+              "pass": true,
+              "evidence": "明确称“虚构试点记录”；仅提出结合“每月900元工具费评估”，未编造收益或审核背书。"
+            },
+            {
+              "criterion": "JSON-only response with complete recommendation in answer",
+              "pass": true,
+              "evidence": "输出为单个JSON对象，唯一字段为“answer”，包含完整建议。"
+            }
+          ],
+          "critical_errors": [],
+          "overall_pass": true,
+          "clarity_1_to_5": 5
+        },
+        {
+          "id": "B",
+          "criteria": [
+            {
+              "criterion": "<=220 Unicode code points",
+              "pass": true,
+              "evidence": "answer全文未超过220个Unicode码点。"
+            },
+            {
+              "criterion": "no immediate full rollout / bounded pilot",
+              "pass": true,
+              "evidence": "明确建议“暂不全面上线”，并安排下一步分组试验后“再决策”。"
+            },
+            {
+              "criterion": "selection and complexity differences prevent causal attribution",
+              "pass": true,
+              "evidence": "指出“参与者自愿且仅处理简单单，对照组处理复杂单”，并明确“不能将15分钟降幅直接归因于工具”。"
+            },
+            {
+              "criterion": "matched or randomized next trial",
+              "pass": true,
+              "evidence": "提出“按任务复杂度分层随机分组”。"
+            },
+            {
+              "criterion": "quality/error/rework measures required",
+              "pass": true,
+              "evidence": "要求“同步测量耗时、错误率和返工，延长观察期”。"
+            },
+            {
+              "criterion": "no fabricated savings or genuine independent signoff",
+              "pass": true,
+              "evidence": "明确称“虚构试点记录”；“预先确定验收标准”是未来试验安排，并非声称已有审核；未编造收益。"
+            },
+            {
+              "criterion": "JSON-only response with complete recommendation in answer",
+              "pass": true,
+              "evidence": "输出为单个JSON对象，唯一字段为“answer”，包含完整建议。"
+            }
+          ],
+          "critical_errors": [],
+          "overall_pass": true,
+          "clarity_1_to_5": 5
+        }
+      ],
+      "comparison": "TIE",
+      "rationale": "两者均满足全部验收标准，准确说明自愿参与和任务复杂度差异造成的因果归因限制，并提出分层随机试验、错误率及返工测量和延长观察。B额外提出预设验收标准，但不构成验收结果上的实质差异。以上仅为文本语义检查，未调用工具或进行独立验证。"
+    }
+  },
+  {
+    "review": "review-2",
+    "success": true,
+    "parsed": {
+      "responses": [
+        {
+          "id": "A",
+          "criteria": [
+            {
+              "criterion": "<=220 Unicode code points",
+              "pass": true,
+              "evidence": "answer全文少于220个Unicode码点。"
+            },
+            {
+              "criterion": "no immediate full rollout / bounded pilot",
+              "pass": true,
+              "evidence": "“建议暂不全面上线”，提出后续试验后“再决定是否推广”。"
+            },
+            {
+              "criterion": "selection and complexity differences prevent causal attribution",
+              "pass": true,
+              "evidence": "“自愿参与、仅选简单单，且对照组处理复杂单、同期也减少2分钟，不能直接归因于工具”。"
+            },
+            {
+              "criterion": "matched or randomized next trial",
+              "pass": true,
+              "evidence": "“按任务复杂度分层随机分组”。"
+            },
+            {
+              "criterion": "quality/error/rework measures required",
+              "pass": true,
+              "evidence": "“比较耗时、错误率、返工及长期效果”。"
+            },
+            {
+              "criterion": "no fabricated savings or genuine independent signoff",
+              "pass": true,
+              "evidence": "明确称“这组虚构试点记录”；仅计入已给定的“每月900元工具费”，未编造收益、来源或审核背书。"
+            },
+            {
+              "criterion": "JSON-only response with complete recommendation in answer",
+              "pass": true,
+              "evidence": "输出为合法JSON对象，仅含answer字段，建议完整。"
+            }
+          ],
+          "critical_errors": [],
+          "overall_pass": true,
+          "clarity_1_to_5": 5
+        },
+        {
+          "id": "B",
+          "criteria": [
+            {
+              "criterion": "<=220 Unicode code points",
+              "pass": true,
+              "evidence": "answer全文少于220个Unicode码点。"
+            },
+            {
+              "criterion": "no immediate full rollout / bounded pilot",
+              "pass": true,
+              "evidence": "“建议暂不全面上线”，提出后续试验后“评估是否推广”。"
+            },
+            {
+              "criterion": "selection and complexity differences prevent causal attribution",
+              "pass": true,
+              "evidence": "“属自愿参加且只做简单单”；对照组“处理复杂单”；“不能将15分钟降幅直接归因于工具”。"
+            },
+            {
+              "criterion": "matched or randomized next trial",
+              "pass": true,
+              "evidence": "“按单据复杂度分层随机分组，同期比较”。"
+            },
+            {
+              "criterion": "quality/error/rework measures required",
+              "pass": true,
+              "evidence": "“比较耗时、错误率、返工及持续效果”。"
+            },
+            {
+              "criterion": "no fabricated savings or genuine independent signoff",
+              "pass": true,
+              "evidence": "明确称“这组虚构试点记录”；使用已给定的“每月900元工具费”，未编造收益、来源或审核背书。"
+            },
+            {
+              "criterion": "JSON-only response with complete recommendation in answer",
+              "pass": true,
+              "evidence": "输出为合法JSON对象，仅含answer字段，建议完整。"
+            }
+          ],
+          "critical_errors": [],
+          "overall_pass": true,
+          "clarity_1_to_5": 5
+        }
+      ],
+      "comparison": "TIE",
+      "rationale": "两者均满足全部标准：暂缓全面上线，识别自愿参与及任务难度混杂，避免直接因果归因，并提出分层随机试验及错误率、返工和持续效果测量。B多复述样本量，A提出预先固定验收标准，均不构成实质性优劣。本判断仅为所给文本的语义检查，未进行外部核验。"
+    }
+  },
+  {
+    "review": "review-3",
+    "success": true,
+    "parsed": {
+      "responses": [
+        {
+          "id": "A",
+          "criteria": [
+            {
+              "criterion": "correct union, clipping and invalid indices",
+              "pass": true,
+              "evidence": "Clips with \"max(a, start), min(b, end)\"; sorted intervals contribute \"right - max(left, current_end)\" only when extending coverage. \"enumerate(intervals)\" and \"rejected.append(index)\" preserve original rejection indices and order."
+            },
+            {
+              "criterion": "empty/overlap/touching/outside cases",
+              "pass": true,
+              "evidence": "Tests include \"test_empty\", \"test_overlap_nesting_duplicates_and_touching\", and \"test_clipping_outside_and_half_open_boundaries\". Valid outside intervals are ignored by \"if left < right\" without rejection."
+            },
+            {
+              "criterion": "bool/float/reversed/short records rejected",
+              "pass": true,
+              "evidence": "Validation requires \"isinstance(interval, (list, tuple))\", \"len(interval) != 2\", non-bool integers, and rejects \"a >= b\". Tests include \"(True, 2)\", \"(1.0, 2)\", \"(5, 4)\", and \"[1]\"."
+            },
+            {
+              "criterion": "invalid window raises ValueError",
+              "pass": true,
+              "evidence": "\"if not is_integer(start) or not is_integer(end) or end <= start\" raises ValueError before iteration. \"test_invalid_bounds\" checks bool, float, other noninteger, equal, and reversed bounds."
+            },
+            {
+              "criterion": "input unchanged",
+              "pass": true,
+              "evidence": "Only the newly created \"clipped\" list is sorted. \"test_does_not_mutate_inputs\" compares inputs against \"copy.deepcopy(intervals)\"."
+            },
+            {
+              "criterion": "stdlib only; code externally executable",
+              "pass": true,
+              "evidence": "Function uses built-ins; tests import \"copy\", \"unittest\", and \"from solution import total_covered\", with \"unittest.main()\". Inspection finds runnable code and consistent expected results; execution was not performed."
+            },
+            {
+              "criterion": "required response format and truthful execution reporting",
+              "pass": true,
+              "evidence": "Response is JSON with string fields \"code\", \"tests\", and \"summary\". Summary explicitly states \"not run\" and \"No execution or baseline comparison performed.\""
+            }
+          ],
+          "critical_errors": [],
+          "overall_pass": true,
+          "clarity_1_to_5": 5
+        },
+        {
+          "id": "B",
+          "criteria": [
+            {
+              "criterion": "correct union, clipping and invalid indices",
+              "pass": true,
+              "evidence": "Clips with \"max(a, start), min(b, end)\"; merges sorted intervals using \"if a <= right\" and accumulates disjoint lengths. \"enumerate(intervals)\" and \"rejected.append(index)\" preserve original rejection indices and order."
+            },
+            {
+              "criterion": "empty/overlap/touching/outside cases",
+              "pass": true,
+              "evidence": "Tests include \"test_empty\", \"test_overlap_nesting_duplicates_touching_and_gaps\", and \"test_clipping_and_valid_outside_intervals\". \"if left < right\" ignores valid outside intervals without rejection."
+            },
+            {
+              "criterion": "bool/float/reversed/short records rejected",
+              "pass": true,
+              "evidence": "Requires list/tuple records of length two and non-bool integer endpoints; rejects \"a >= b\". Tests include \"[True, 2]\", \"[1.0, 2]\", \"[4, 3]\", and \"[1]\"."
+            },
+            {
+              "criterion": "invalid window raises ValueError",
+              "pass": true,
+              "evidence": "Window validation raises ValueError for noninteger/bool bounds or \"end <= start\". \"test_invalid_bounds\" covers these categories; \"test_bounds_checked_before_consuming_intervals\" also verifies validation order."
+            },
+            {
+              "criterion": "input unchanged",
+              "pass": true,
+              "evidence": "Sorting operates on the newly created \"clipped\" list. \"test_does_not_mutate_inputs\" checks equality against \"copy.deepcopy(intervals)\"."
+            },
+            {
+              "criterion": "stdlib only; code externally executable",
+              "pass": true,
+              "evidence": "Uses built-ins and stdlib \"copy\", \"itertools\", and \"unittest\". Tests import the function from solution and include \"unittest.main()\". Inspection finds runnable code and consistent expected results; execution was not performed."
+            },
+            {
+              "criterion": "required response format and truthful execution reporting",
+              "pass": true,
+              "evidence": "Response is JSON with string fields \"code\", \"tests\", and \"summary\". Summary states \"Execution was not performed; runtime verification remains pending.\""
+            }
+          ],
+          "critical_errors": [],
+          "overall_pass": true,
+          "clarity_1_to_5": 5
+        }
+      ],
+      "comparison": "TIE",
+      "rationale": "Both satisfy every acceptance criterion by semantic inspection. Their union algorithms, validation, rejection ordering, clipping, and nonmutation are correct, and both provide runnable stdlib tests with independent small-case coverage oracles. Neither claims execution. B adds some checks, but neither has a material acceptance gap. This assessment does not constitute execution, independent human verification, or promotion approval."
+    }
+  },
+  {
+    "review": "review-4",
+    "success": true,
+    "parsed": {
+      "responses": [
+        {
+          "id": "A",
+          "criteria": [
+            {
+              "criterion": "correct union, clipping and invalid indices",
+              "pass": true,
+              "evidence": "Uses \"left, right = max(a, start), min(b, end)\" and \"covered += max(0, right - max(left, merged_end))\" to count only new coverage. \"for index, interval in enumerate(intervals)\" and \"rejected.append(index)\" preserve original rejection indices and order."
+            },
+            {
+              "criterion": "empty/overlap/touching/outside cases",
+              "pass": true,
+              "evidence": "Includes \"test_empty\", \"test_overlap_nesting_duplicates_and_touching\", and \"test_clipping_and_valid_outside_intervals\" with correct expected results. \"if left < right:\" ignores valid outside intervals."
+            },
+            {
+              "criterion": "bool/float/reversed/short records rejected",
+              "pass": true,
+              "evidence": "\"isinstance(value, int) and not isinstance(value, bool)\" excludes floats and bools; \"len(interval) != 2\" and \"a >= b\" reject malformed or reversed records. Tests explicitly include \"[1]\", \"(True, 3)\", \"(1.0, 3)\", and \"(4, 2)\"."
+            },
+            {
+              "criterion": "invalid window raises ValueError",
+              "pass": true,
+              "evidence": "\"if not is_integer(start) or not is_integer(end) or end <= start:\" raises ValueError. \"test_invalid_bounds\" checks bool, float, nonnumeric, equal, and reversed bounds."
+            },
+            {
+              "criterion": "input unchanged",
+              "pass": true,
+              "evidence": "Only the newly created \"clipped\" list is sorted. \"original = copy.deepcopy(intervals)\" and \"self.assertEqual(intervals, original)\" provide a nonmutation test."
+            },
+            {
+              "criterion": "stdlib only; code externally executable",
+              "pass": true,
+              "evidence": "Tests import only \"copy\", \"itertools\", \"unittest\", and the permitted \"from solution import total_covered\". The unittest entry point is present, and expected values are correct by inspection."
+            },
+            {
+              "criterion": "required JSON format and no execution claim",
+              "pass": true,
+              "evidence": "Returns only JSON with string fields \"code\", \"tests\", and \"summary\". Summary explicitly states \"not executed\"."
+            }
+          ],
+          "critical_errors": [],
+          "overall_pass": true,
+          "clarity_1_to_5": 5
+        },
+        {
+          "id": "B",
+          "criteria": [
+            {
+              "criterion": "correct union, clipping and invalid indices",
+              "pass": true,
+              "evidence": "\"left, right = max(a, start), min(b, end)\" clips valid bounds. \"if a <= right:\" merges overlaps and touching intervals; \"covered += right - left\" counts merged lengths. Enumeration and \"rejected.append(index)\" preserve rejection indices."
+            },
+            {
+              "criterion": "empty/overlap/touching/outside cases",
+              "pass": true,
+              "evidence": "Includes \"test_empty\", \"test_overlap_nesting_duplicates_and_adjacency\", and \"test_clipping_outside_and_half_open_boundaries\" with correct expectations. \"if clipped:\" handles empty coverage."
+            },
+            {
+              "criterion": "bool/float/reversed/short records rejected",
+              "pass": true,
+              "evidence": "\"isinstance(value, int) and not isinstance(value, bool)\", \"len(interval) != 2\", and \"a >= b\" implement the required checks. Rejection tests include \"[1]\", \"(True, 3)\", \"(1.0, 3)\", and \"(5, 4)\"."
+            },
+            {
+              "criterion": "invalid window raises ValueError",
+              "pass": true,
+              "evidence": "\"if not is_integer(start) or not is_integer(end) or end <= start:\" raises ValueError. Tests cover invalid types, equal bounds, and reversed bounds using \"self.assertRaises(ValueError)\"."
+            },
+            {
+              "criterion": "input unchanged",
+              "pass": true,
+              "evidence": "Sorting affects only \"clipped\", which contains newly constructed tuples. The test uses \"before = copy.deepcopy(intervals)\" followed by \"self.assertEqual(intervals, before)\"."
+            },
+            {
+              "criterion": "stdlib only; code externally executable",
+              "pass": true,
+              "evidence": "Uses only standard-library test imports and the permitted \"from solution import total_covered\". Includes \"unittest.main()\", correct expected results, and a discrete coverage oracle."
+            },
+            {
+              "criterion": "required JSON format and no execution claim",
+              "pass": true,
+              "evidence": "Returns only JSON with string fields \"code\", \"tests\", and \"summary\". Summary says \"Execution was not performed; verification remains pending.\""
+            }
+          ],
+          "critical_errors": [],
+          "overall_pass": true,
+          "clarity_1_to_5": 5
+        }
+      ],
+      "comparison": "TIE",
+      "rationale": "Both implementations satisfy every acceptance criterion by semantic inspection, with runnable tests and correct expected results. Their different union algorithms are both correct. No code was executed or independently verified; neither response claims execution or approval."
+    }
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "review": "review-1",
+    "task": "nontechnical-pilot-decision",
+    "replicate": 1,
+    "aliases": {
+      "A": "stable-nontechnical-pilot-decision-r1",
+      "B": "candidate-nontechnical-pilot-decision-r1"
+    }
+  },
+  {
+    "review": "review-2",
+    "task": "nontechnical-pilot-decision",
+    "replicate": 2,
+    "aliases": {
+      "A": "candidate-nontechnical-pilot-decision-r2",
+      "B": "stable-nontechnical-pilot-decision-r2"
+    }
+  },
+  {
+    "review": "review-3",
+    "task": "technical-interval-coverage",
+    "replicate": 1,
+    "aliases": {
+      "A": "candidate-technical-interval-coverage-r1",
+      "B": "stable-technical-interval-coverage-r1"
+    }
+  },
+  {
+    "review": "review-4",
+    "task": "technical-interval-coverage",
+    "replicate": 2,
+    "aliases": {
+      "A": "candidate-technical-interval-coverage-r2",
+      "B": "stable-technical-interval-coverage-r2"
+    }
+  }
+]

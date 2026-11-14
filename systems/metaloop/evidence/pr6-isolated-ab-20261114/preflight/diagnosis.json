@@ -1,0 +1,17 @@
+{
+  "observed_mount": "/home/agent/.codex is read-only; auth source remains read-only",
+  "initial_failures": [
+    "mandatory native state/installation write failed",
+    "native project-doc discovery invoked unsupported nested bwrap NETLINK_ROUTE socket"
+  ],
+  "successful_controlled_changes": [
+    "Per-process fresh writable native runtime directory via CODEX_HOME, using its native configuration purpose",
+    "Read-only auth symlink; no credential serialization or original configuration changes",
+    "project_doc_max_bytes=0; shell_tool/shell_snapshot/unified_exec/multi_agent disabled; read-only sandbox retained"
+  ],
+  "successful_runner": "Original installed codex-cli 0.167.0-alpha.4",
+  "alternative_0_114_runner": "Preflight failed; not used for scored runs",
+  "source_basis": "https://github.com/openai/codex/blob/main/codex-rs/runtime-agent-instance/src/installation_id.rs",
+  "source_limit": "Upstream source retrieved on audit date, not proof of exact compiled implementation",
+  "authorization": "Explicit user approval in this conversation; previous automatic-review export block is superseded within this scope"
+}

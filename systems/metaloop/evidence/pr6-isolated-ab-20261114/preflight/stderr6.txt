@@ -1,0 +1,4 @@
+Reading additional input from stdin...
+2026-11-14T06:33:38.598790Z  WARN codex_features: unknown feature key in config: experimental_use_rmcp_client
+2026-11-14T06:33:38.601744Z  WARN codex_features: unknown feature key in config: experimental_use_rmcp_client
+Error: failed to initialize in-process app-server client: Read-only file system (os error 30)

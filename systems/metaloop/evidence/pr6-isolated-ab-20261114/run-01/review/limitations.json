@@ -1,0 +1,13 @@
+{
+  "method": "Separate native CLI process/runtime/cwd per review, anonymized response order",
+  "label_mapping_sent_to_judge": false,
+  "original_prompts_sent_to_judge": false,
+  "worker_conversation_sent_to_judge": false,
+  "independent_context": true,
+  "judge_model": "gpt-6.1-sol",
+  "different_model_independence": "NOT_VERIFIED",
+  "human_review": "NOT_VERIFIED",
+  "correlated_model_error_possible": true,
+  "source": "Self-contained synthetic facts/task contract, no claimed external actual event",
+  "deterministic_external_tests": "Stored separately, not replaced by judge opinions"
+}
