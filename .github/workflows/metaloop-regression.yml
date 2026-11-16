@@ -4,12 +4,14 @@ on:
     paths:
       - 'systems/metaloop/**'
       - 'prompts/**'
+      - 'skills/**'
       - 'README.md'
       - '.github/workflows/metaloop-regression.yml'
   push:
     paths:
       - 'systems/metaloop/**'
       - 'prompts/**'
+      - 'skills/**'
       - 'README.md'
       - '.github/workflows/metaloop-regression.yml'
   workflow_dispatch:
