@@ -150,3 +150,7 @@ Skill Repository
 优先从“快速入口”按任务选择 Prompt 或 Skill。只有在需要了解仓库结构时，再进入具体分类目录。
 
 仓库文件是事实源；本 README 是导航层。任何 Prompt 或 Skill 新增、更新、移动、重命名或删除后，都必须同步更新本页，保证导航与实际仓库一致。
+
+## CI 触发范围与验证边界
+
+`MetaLoop regression` 在 `prompts/**`、`skills/**`、`systems/metaloop/**`、根 README 或工作流文件变更时触发。当前回归运行的是 MetaLoop 确定性测试、候选对照及 Prompt Registry 严格审计；`skills/**` 变更触发 CI **不等于**已对 Skill 行为进行独立质量评测。Skill 的真实模型任务、跨域 held-out 和独立复核仍须单独记录，不能由 CI 绿灯推断效果改善。
