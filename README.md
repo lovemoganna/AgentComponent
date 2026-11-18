@@ -112,7 +112,7 @@ skills/
 
 | Prompt | 解决的问题 | 路径 |
 |---|---|---|
-| [Prompt 仓库分类与归档](prompts/workflow/maintain/prompt-repository.md) | 新 Prompt 如何查重、分类、命名和持续维护 | `prompts/workflow/maintain/prompt-repository.md` |
+| [Prompt 仓库分类与归档](prompts/workflow/maintain/prompt-repository.md) | 查重与归档；同步 README/Registry Blob SHA 并通过严格审计后方可提交 | `prompts/workflow/maintain/prompt-repository.md` |
 
 ## 可运行元系统
 

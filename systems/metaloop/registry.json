@@ -79,9 +79,9 @@
     },
     {
       "path": "prompts/workflow/maintain/prompt-repository.md",
-      "blob_sha": "ea1fd94b5771ac3fc1a925ef80125e4c08830a95",
+      "blob_sha": "3f0840e5e0937f94a3a22d5f521f36b8945e8ad5",
       "version": "unversioned",
-      "status": "catalogued",
+      "status": "candidate",
       "evaluation_status": "not_independently_evaluated"
     },
     {
