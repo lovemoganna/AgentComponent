@@ -133,6 +133,13 @@ final-v2.md
 
 - **README 同步是归档完成条件：每次 Prompt 新增、更新、移动、重命名或删除后，必须基于仓库当前全量 Prompt 通篇更新根 `README.md`，使其作为仓库导航地图，同步能力分类、场景入口、Prompt 名称、用途、路径与链接，并校验无遗漏、重复、失效链接或 README 与实际目录不一致；未完成 README 同步，不得视为归档完成。**
 
+## Registry 同步与验收门禁
+
+- 每次新增、修改、移动、重命名或删除 `prompts/**/*.md`，除同步根 README 外，还必须同步 `systems/metaloop/registry.json`：核对全量路径、状态及对应文件的 Git Blob SHA（不能以普通文件 SHA-1 代替）。
+- 新建 Prompt 先在隔离分支登记为 Candidate，记录适用范围及 `not_independently_evaluated`；修改现有正式 Prompt 仅生成独立 Candidate，不得直接覆盖已经验收的 main 基线。删除、移动或更名时清理旧路径，保留必要版本与回滚引用。
+- 提交前执行 `python systems/metaloop/lifecycle.py audit --strict` 与相关确定性回归，核查 `unregistered`、`missing_file`、`hash_mismatch`、重复登记及 README 链接。验收不通过则停止提交/合并并修正隔离分支。
+- 审计成功仅代表文件/登记一致，不能证明 Prompt 效果提升。语义升级还需冻结输入、相同模型/工具条件下的真实 held-out A/B、独立证据、无关键回归及合并门禁；证据不足保持 Candidate。
+
 ## 逆向封装规则
 
 如果输入是一段经验、案例、方法或优秀回答：
